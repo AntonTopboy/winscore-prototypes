@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Игрок | WinScore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .player-hero {
+            background: linear-gradient(135deg, #c8102e 0%, #8b0a1f 100%);
+            padding: 24px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .player-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+            background: white;
+        }
+        .player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .player-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.3);
+            line-height: 1;
+        }
+        .player-info-block {
+            background: var(--ws-bg-primary);
+            padding: 16px;
+            margin: -24px 16px 16px;
+            border-radius: var(--ws-radius-lg);
+            position: relative;
+            z-index: 10;
+        }
+        .player-name-big {
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .player-team-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--ws-text-secondary);
+            text-decoration: none;
+        }
+        .player-team-link img {
+            width: 20px;
+            height: 20px;
+        }
+        .player-position-badge {
+            display: inline-block;
+            background: var(--ws-accent-orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--ws-radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        .player-key-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--ws-border);
+        }
+        .key-stat {
+            text-align: center;
+        }
+        .key-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .key-stat-label {
+            font-size: 10px;
+            color: var(--ws-text-tertiary);
+            text-transform: uppercase;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--ws-radius-md);
+            border: 1px solid var(--ws-border);
+            background: var(--ws-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--ws-text-primary);
+            cursor: pointer;
+        }
+        .action-btn .material-symbols-rounded {
+            font-size: 18px;
+        }
+        .win-ai-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: var(--ws-radius-lg);
+            padding: 16px;
+            margin: 16px;
+            color: white;
+        }
+        .win-ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .win-ai-logo {
+            width: 32px;
+            height: 32px;
+            background: var(--ws-accent-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 12px;
+        }
+        .win-ai-title {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .win-ai-question {
+            background: rgba(255,255,255,0.08);
+            padding: 12px 14px;
+            border-radius: var(--ws-radius-md);
+            font-size: 13px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .win-ai-question:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .chart-placeholder {
+            height: 160px;
+            background: var(--ws-bg-secondary);
+            border-radius: var(--ws-radius-md);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 16px;
+            gap: 8px;
+        }
+        .chart-bar {
+            width: 24px;
+            background: var(--ws-accent-orange);
+            border-radius: 4px 4px 0 0;
+        }
+        .attribute-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .attribute-row:last-child { border-bottom: none; }
+        .attribute-name {
+            width: 100px;
+            font-size: 13px;
+            color: var(--ws-text-secondary);
+        }
+        .attribute-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: var(--ws-bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .attribute-bar {
+            height: 100%;
+            background: var(--ws-accent-orange);
+            border-radius: 4px;
+        }
+        .attribute-value {
+            width: 40px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .career-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .career-item:last-child { border-bottom: none; }
+        .career-team-logo {
+            width: 40px;
+            height: 40px;
+        }
+        .career-team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .career-info { flex: 1; }
+        .career-team-name { font-weight: 600; }
+        .career-period {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .career-stats {
+            text-align: right;
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>18:05</span>
+        <span>5G 📶 58%</span>
+    </div>
+
+    <div class="header" style="background: #c8102e; color: white;">
+        <a href="team.html" class="header-back" style="color: white;">
+            <span class="material-symbols-rounded">arrow_back</span>
+        </a>
+        <div class="header-title" style="color: white;">Игрок</div>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">search</span>
+        </div>
+    </div>
+
+    <div class="player-hero">
+        <div class="player-photo">
+            <img src="https://media.api-sports.io/football/players/306.png" alt="Mohamed Salah">
+        </div>
+        <div class="player-number">11</div>
+    </div>
+
+    <div class="player-info-block">
+        <div class="player-name-big">Мохамед Салах</div>
+        <a href="team.html" class="player-team-link">
+            <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            <span>Ливерпуль</span>
+            <span class="material-symbols-rounded" style="font-size: 16px;">chevron_right</span>
+        </a>
+        <span class="player-position-badge">Правый вингер</span>
+        
+        <div class="player-key-stats">
+            <div class="key-stat">
+                <div class="key-stat-value" style="color: var(--ws-accent-orange);">8.4</div>
+                <div class="key-stat-label">Рейтинг</div>
+            </div>
+            <div class="key-stat">
+                <div class="key-stat-value">15</div>
+                <div class="key-stat-label">Голы</div>
+            </div>
+            <div class="key-stat">
+                <div class="key-stat-value">11</div>
+                <div class="key-stat-label">Передачи</div>
+            </div>
+            <div class="key-stat">
+                <div class="key-stat-value">17</div>
+                <div class="key-stat-label">Матчи</div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-btn">
+                <span class="material-symbols-rounded">favorite_border</span>
+                <span>В избранное</span>
+            </button>
+            <button class="action-btn">
+                <span class="material-symbols-rounded">compare_arrows</span>
+                <span>Сравнить</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="tabs" style="margin-top: 0;">
+        <div class="tab active">Обзор</div>
+        <div class="tab">Сезон</div>
+        <div class="tab">Матчи</div>
+        <div class="tab">Статистика</div>
+    </div>
+
+    <div class="content" style="padding-bottom: 120px;">
+        <div class="win-ai-card">
+            <div class="win-ai-header">
+                <div class="win-ai-logo">WIN</div>
+                <div class="win-ai-title">WIN AI</div>
+            </div>
+            <div class="win-ai-question">📈 Забьёт ли Салах в следующем матче?</div>
+            <div class="win-ai-question">⚽ Сколько голов забьёт до конца сезона?</div>
+            <div class="win-ai-question">🏆 Получит ли Золотую бутсу?</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">timeline</span>
+                    Рейтинг WS по месяцам
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-placeholder">
+                    <div class="chart-bar" style="height: 70%;"></div>
+                    <div class="chart-bar" style="height: 85%;"></div>
+                    <div class="chart-bar" style="height: 75%;"></div>
+                    <div class="chart-bar" style="height: 90%;"></div>
+                    <div class="chart-bar" style="height: 95%;"></div>
+                    <div class="chart-bar" style="height: 80%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ws-text-tertiary); margin-top: 8px;">
+                    <span>Июл</span>
+                    <span>Авг</span>
+                    <span>Сен</span>
+                    <span>Окт</span>
+                    <span>Ноя</span>
+                    <span>Дек</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">person</span>
+                    Персональные данные
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Национальность</span>
+                    <span class="stat-value">🇪🇬 Египет</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Возраст</span>
+                    <span class="stat-value">32 года (15.06.1992)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Рост</span>
+                    <span class="stat-value">175 см</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Вес</span>
+                    <span class="stat-value">71 кг</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Рабочая нога</span>
+                    <span class="stat-value">Левая</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Рыночная стоимость</span>
+                    <span class="stat-value">€55M</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">radar</span>
+                    Атрибуты
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="attribute-row">
+                    <span class="attribute-name">Нападение</span>
+                    <div class="attribute-bar-bg">
+                        <div class="attribute-bar" style="width: 92%;"></div>
+                    </div>
+                    <span class="attribute-value">92</span>
+                </div>
+                <div class="attribute-row">
+                    <span class="attribute-name">Техника</span>
+                    <div class="attribute-bar-bg">
+                        <div class="attribute-bar" style="width: 89%;"></div>
+                    </div>
+                    <span class="attribute-value">89</span>
+                </div>
+                <div class="attribute-row">
+                    <span class="attribute-name">Тактика</span>
+                    <div class="attribute-bar-bg">
+                        <div class="attribute-bar" style="width: 85%;"></div>
+                    </div>
+                    <span class="attribute-value">85</span>
+                </div>
+                <div class="attribute-row">
+                    <span class="attribute-name">Защита</span>
+                    <div class="attribute-bar-bg">
+                        <div class="attribute-bar" style="width: 42%;"></div>
+                    </div>
+                    <span class="attribute-value">42</span>
+                </div>
+                <div class="attribute-row">
+                    <span class="attribute-name">Футбольный IQ</span>
+                    <div class="attribute-bar-bg">
+                        <div class="attribute-bar" style="width: 88%;"></div>
+                    </div>
+                    <span class="attribute-value">88</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">bar_chart</span>
+                    Статистика сезона
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Матчи</span>
+                    <span class="stat-value">17</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Голы</span>
+                    <span class="stat-value">15</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Голевые передачи</span>
+                    <span class="stat-value">11</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">xG</span>
+                    <span class="stat-value">12.4</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">xA</span>
+                    <span class="stat-value">8.7</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Минуты</span>
+                    <span class="stat-value">1,487</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">history</span>
+                    Карьера
+                </div>
+            </div>
+            <div class="card-body" style="padding: 8px 16px;">
+                <a href="team.html" class="career-item" style="text-decoration: none; color: inherit;">
+                    <div class="career-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <div class="career-info">
+                        <div class="career-team-name">Ливерпуль</div>
+                        <div class="career-period">2017 — настоящее время</div>
+                    </div>
+                    <div class="career-stats">
+                        226 матчей<br>157 голов
+                    </div>
+                </a>
+                <div class="career-item">
+                    <div class="career-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/497.png" alt="">
+                    </div>
+                    <div class="career-info">
+                        <div class="career-team-name">Рома</div>
+                        <div class="career-period">2015 — 2017</div>
+                    </div>
+                    <div class="career-stats">
+                        83 матча<br>34 гола
+                    </div>
+                </div>
+                <div class="career-item">
+                    <div class="career-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/49.png" alt="">
+                    </div>
+                    <div class="career-info">
+                        <div class="career-team-name">Челси</div>
+                        <div class="career-period">2014 — 2015</div>
+                    </div>
+                    <div class="career-stats">
+                        19 матчей<br>2 гола
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">flag</span>
+                    Сборная
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Страна</span>
+                    <span class="stat-value">🇪🇬 Египет</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Дебют</span>
+                    <span class="stat-value">03.09.2011</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Матчи</span>
+                    <span class="stat-value">99</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Голы</span>
+                    <span class="stat-value">57</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="win-ai.html" class="floating-win-btn">
+        <span>WIN</span>
+    </a>
+
+    <nav class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="bottom-nav-item active">WS</a>
+            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">favorite</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">search</span>
+            </a>
+        </div>
+        <div class="home-indicator">
+            <div class="home-indicator-bar"></div>
+        </div>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
