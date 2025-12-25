@@ -30,7 +30,7 @@
             object-fit: cover;
         }
         .coach-info-block {
-            background: var(--ws-bg-primary);
+            background: var(--ws-bg-secondary);
             padding: 20px 16px;
             margin: -60px 16px 16px;
             border-radius: var(--ws-radius-lg);
@@ -53,44 +53,18 @@
             gap: 8px;
             margin-top: 12px;
             padding: 8px 16px;
-            background: var(--ws-bg-secondary);
+            background: var(--ws-bg-tertiary);
             border-radius: var(--ws-radius-full);
             text-decoration: none;
             color: var(--ws-text-primary);
             font-size: 13px;
             font-weight: 500;
+            transition: all 0.2s;
         }
+        .coach-team-link:active { transform: scale(0.95); }
         .coach-team-link img {
             width: 24px;
             height: 24px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 20px;
-        }
-        .stats-grid-item {
-            text-align: center;
-        }
-        .stats-grid-value {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        .stats-grid-label {
-            font-size: 11px;
-            color: var(--ws-text-tertiary);
-            text-transform: uppercase;
-        }
-        .career-section {
-            padding: 16px;
-        }
-        .career-section-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--ws-text-secondary);
-            text-transform: uppercase;
-            margin-bottom: 12px;
         }
         .career-club {
             display: flex;
@@ -100,7 +74,11 @@
             background: var(--ws-bg-secondary);
             border-radius: var(--ws-radius-md);
             margin-bottom: 10px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
         }
+        .career-club:active { transform: scale(0.98); }
         .career-club-logo {
             width: 44px;
             height: 44px;
@@ -151,19 +129,6 @@
             font-weight: 700;
             color: var(--ws-accent-orange);
         }
-        .tactics-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .tactics-item:last-child { border-bottom: none; }
-        .tactics-label { font-size: 13px; }
-        .tactics-value {
-            font-weight: 600;
-            font-size: 13px;
-        }
     </style>
 </head>
 <body>
@@ -172,13 +137,15 @@
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: #1a1a2e; color: white;">
+    <div class="header" style="background: #1a1a2e; border: none;">
         <a href="team.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Тренер</div>
-        <div class="header-actions" style="color: white;">
-            <span class="material-symbols-rounded">share</span>
+        <div class="header-actions">
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">share</span>
+            </button>
         </div>
     </div>
 
@@ -199,13 +166,14 @@
     </div>
 
     <div class="tabs" style="margin-top: 0;">
-        <div class="tab active">Обзор</div>
-        <div class="tab">Карьера</div>
-        <div class="tab">Трофеи</div>
-        <div class="tab">Статистика</div>
+        <div class="tab active" data-tab="overview">Обзор</div>
+        <div class="tab" data-tab="career">Карьера</div>
+        <div class="tab" data-tab="trophies">Трофеи</div>
+        <div class="tab" data-tab="stats">Статистика</div>
     </div>
 
-    <div class="content" style="padding-bottom: 120px;">
+    <!-- Tab: Overview -->
+    <div class="content tab-content active" id="tab-overview">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -241,9 +209,9 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="stats-grid">
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
                     <div class="stats-grid-item">
-                        <div class="stats-grid-value" style="color: var(--ws-accent-green);">76%</div>
+                        <div class="stats-grid-value green">76%</div>
                         <div class="stats-grid-label">Побед</div>
                     </div>
                     <div class="stats-grid-item">
@@ -251,52 +219,9 @@
                         <div class="stats-grid-label">Матчей</div>
                     </div>
                     <div class="stats-grid-item">
-                        <div class="stats-grid-value">44</div>
+                        <div class="stats-grid-value orange">44</div>
                         <div class="stats-grid-label">Забито</div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="career-section">
-            <div class="career-section-title">Тренерская карьера</div>
-            <a href="team.html" class="career-club" style="text-decoration: none; color: inherit;">
-                <div class="career-club-logo">
-                    <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                </div>
-                <div class="career-club-info">
-                    <div class="career-club-name">Ливерпуль</div>
-                    <div class="career-club-period">2024 — настоящее время</div>
-                </div>
-                <div class="career-club-stats">
-                    <div class="career-club-stat-row">17 матчей</div>
-                    <div class="career-club-stat-row">76% побед</div>
-                </div>
-            </a>
-            <div class="career-club">
-                <div class="career-club-logo">
-                    <img src="https://media.api-sports.io/football/teams/203.png" alt="">
-                </div>
-                <div class="career-club-info">
-                    <div class="career-club-name">Фейеноорд</div>
-                    <div class="career-club-period">2021 — 2024</div>
-                </div>
-                <div class="career-club-stats">
-                    <div class="career-club-stat-row">137 матчей</div>
-                    <div class="career-club-stat-row">64% побед</div>
-                </div>
-            </div>
-            <div class="career-club">
-                <div class="career-club-logo">
-                    <img src="https://media.api-sports.io/football/teams/194.png" alt="">
-                </div>
-                <div class="career-club-info">
-                    <div class="career-club-name">АЗ Алкмар</div>
-                    <div class="career-club-period">2019 — 2021</div>
-                </div>
-                <div class="career-club-stats">
-                    <div class="career-club-stat-row">66 матчей</div>
-                    <div class="career-club-stat-row">57% побед</div>
                 </div>
             </div>
         </div>
@@ -304,9 +229,83 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
+                    <span class="material-symbols-rounded">sports_soccer</span>
+                    Тактический профиль
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Схема</span>
+                    <span class="stat-value">4-3-3</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Стиль</span>
+                    <span class="stat-value">Позиционное владение</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Прессинг</span>
+                    <span class="stat-value">Высокий</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Career -->
+    <div class="content tab-content" id="tab-career">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Тренерская карьера</div>
+
+        <a href="team.html" class="career-club">
+            <div class="career-club-logo">
+                <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            </div>
+            <div class="career-club-info">
+                <div class="career-club-name">Ливерпуль</div>
+                <div class="career-club-period">2024 — настоящее время</div>
+            </div>
+            <div class="career-club-stats">
+                <div class="career-club-stat-row">17 матчей</div>
+                <div class="career-club-stat-row">76% побед</div>
+            </div>
+        </a>
+
+        <div class="career-club">
+            <div class="career-club-logo">
+                <img src="https://media.api-sports.io/football/teams/203.png" alt="">
+            </div>
+            <div class="career-club-info">
+                <div class="career-club-name">Фейеноорд</div>
+                <div class="career-club-period">2021 — 2024</div>
+            </div>
+            <div class="career-club-stats">
+                <div class="career-club-stat-row">137 матчей</div>
+                <div class="career-club-stat-row">64% побед</div>
+            </div>
+        </div>
+
+        <div class="career-club">
+            <div class="career-club-logo">
+                <img src="https://media.api-sports.io/football/teams/194.png" alt="">
+            </div>
+            <div class="career-club-info">
+                <div class="career-club-name">АЗ Алкмар</div>
+                <div class="career-club-period">2019 — 2021</div>
+            </div>
+            <div class="career-club-stats">
+                <div class="career-club-stat-row">66 матчей</div>
+                <div class="career-club-stat-row">57% побед</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Trophies -->
+    <div class="content tab-content" id="tab-trophies">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
                     <span class="material-symbols-rounded">emoji_events</span>
                     Трофеи
                 </div>
+                <span style="font-size: 16px; font-weight: 700; color: var(--ws-accent-orange);">2</span>
             </div>
             <div class="card-body">
                 <div class="trophy-item">
@@ -327,39 +326,81 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Tab: Stats -->
+    <div class="content tab-content" id="tab-stats">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">leaderboard</span>
+                    Карьерная статистика
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Матчей</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="bar-chart-value">220</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Победы</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 65%;"></div>
+                        </div>
+                        <span class="bar-chart-value">65%</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Ничьи</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 18%; background: #9CA3AF;"></div>
+                        </div>
+                        <span class="bar-chart-value">18%</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Поражения</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill red" style="width: 17%;"></div>
+                        </div>
+                        <span class="bar-chart-value">17%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span class="material-symbols-rounded">sports_soccer</span>
-                    Тактический профиль
+                    <span class="material-symbols-rounded">trending_up</span>
+                    Голевые показатели
                 </div>
             </div>
             <div class="card-body">
-                <div class="tactics-item">
-                    <span class="tactics-label">Предпочитаемая схема</span>
-                    <span class="tactics-value">4-3-3</span>
+                <div class="stat-row">
+                    <span class="stat-label">Голов забито (ср.)</span>
+                    <span class="stat-value">2.1</span>
                 </div>
-                <div class="tactics-item">
-                    <span class="tactics-label">Стиль игры</span>
-                    <span class="tactics-value">Позиционное владение</span>
+                <div class="stat-row">
+                    <span class="stat-label">Голов пропущено (ср.)</span>
+                    <span class="stat-value">0.9</span>
                 </div>
-                <div class="tactics-item">
-                    <span class="tactics-label">Прессинг</span>
-                    <span class="tactics-value">Высокий</span>
-                </div>
-                <div class="tactics-item">
-                    <span class="tactics-label">Темп атаки</span>
-                    <span class="tactics-value">Быстрый</span>
+                <div class="stat-row">
+                    <span class="stat-label">Сухие матчи</span>
+                    <span class="stat-value">38%</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="win-ai.html" class="floating-win-btn">
+    <!-- Floating WIN Button -->
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Каков стиль игры Арне Слота?')">
         <span>WIN</span>
     </a>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
@@ -377,10 +418,15 @@
     </nav>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
                 this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabId).classList.add('active');
             });
         });
     </script>
