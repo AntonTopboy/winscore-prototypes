@@ -21,14 +21,20 @@
     <div class="header">
         <div class="header-title">Все матчи</div>
         <div class="header-actions">
-            <span class="material-symbols-rounded">search</span>
-            <span class="material-symbols-rounded">filter_list</span>
+            <button class="header-action" onclick="openSearch()">
+                <span class="material-symbols-rounded">search</span>
+            </button>
+            <button class="header-action" onclick="openFilterModal()">
+                <span class="material-symbols-rounded">filter_list</span>
+            </button>
         </div>
     </div>
 
     <!-- Date Picker -->
     <div class="date-picker">
-        <span class="material-symbols-rounded date-calendar-icon">calendar_today</span>
+        <span class="date-item date-item-calendar">
+            <span class="material-symbols-rounded" style="font-size:18px">calendar_today</span>
+        </span>
         <span class="date-item" data-date="2025-12-24">24.12</span>
         <span class="date-item active" data-date="2025-12-25">Сегодня</span>
         <span class="date-item" data-date="2025-12-26">26.12</span>
@@ -40,202 +46,279 @@
     <!-- Content -->
     <div class="content">
         <!-- Premier League -->
-        <div class="tournament-card expanded" data-tournament="premier-league">
-            <div class="tournament-header" onclick="toggleTournament(this.parentElement)">
-                <div class="tournament-logo">
-                    <img src="https://media.api-sports.io/football/leagues/39.png" alt="Premier League">
+        <div class="tournament-group">
+            <div class="tournament-group-header open" onclick="toggleAccordion(this)">
+                <div class="tournament-group-logo">
+                    <img src="https://media.api-sports.io/football/leagues/39.png" alt="">
                 </div>
-                <div class="tournament-info">
-                    <div class="tournament-name">Англия, Премьер-лига</div>
-                    <div class="tournament-matches">
-                        <span class="material-symbols-rounded" style="font-size:14px">sports_soccer</span>
-                        Матчи: <span class="active">3</span>/10
-                    </div>
+                <div class="tournament-group-info">
+                    <div class="tournament-group-name">Англия, Премьер-лига</div>
+                    <div class="tournament-group-meta">3 матча</div>
                 </div>
-                <span class="material-symbols-rounded tournament-chevron">expand_more</span>
+                <span class="tournament-group-count">LIVE 1</span>
+                <span class="material-symbols-rounded tournament-group-arrow">expand_more</span>
             </div>
-            <div class="tournament-content">
-                <div class="match-status live">LIVE 67'</div>
+            <div class="tournament-group-content open">
                 <a href="match-live.html" class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Манчестер Сити</span>
-                        <div class="match-team-flag">
+                    <div class="match-row-time live">67'</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/50.png" alt="">
+                            <span>Манчестер Сити</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-score-value">2</span>
-                        <span class="match-score-divider">:</span>
-                        <span class="match-score-value">1</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">Арсенал</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/42.png" alt="">
+                            <span>Арсенал</span>
                         </div>
                     </div>
+                    <div class="match-row-score">2<br>1</div>
+                    <span class="match-row-status live">LIVE</span>
                 </a>
-                
-                <div class="match-status">Завершен</div>
                 <a href="match-post.html" class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Ливерпуль</span>
-                        <div class="match-team-flag">
+                    <div class="match-row-time">FT</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team winner">
                             <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                            <span>Ливерпуль</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-score-value">3</span>
-                        <span class="match-score-divider">:</span>
-                        <span class="match-score-value">0</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">Челси</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/49.png" alt="">
+                            <span>Челси</span>
                         </div>
                     </div>
+                    <div class="match-row-score">3<br>0</div>
+                    <span class="match-row-status">Завершен</span>
                 </a>
-
-                <div class="match-status">20:45</div>
                 <a href="match-preview.html" class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Тоттенхэм</span>
-                        <div class="match-team-flag">
+                    <div class="match-row-time">20:45</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/47.png" alt="">
+                            <span>Тоттенхэм</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-time">20:45</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">МЮ</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/33.png" alt="">
+                            <span>Манчестер Юнайтед</span>
                         </div>
                     </div>
+                    <div class="match-row-score">—<br>—</div>
+                    <span class="match-row-status">20:45</span>
                 </a>
             </div>
         </div>
 
         <!-- La Liga -->
-        <div class="tournament-card" data-tournament="laliga">
-            <div class="tournament-header" onclick="toggleTournament(this.parentElement)">
-                <div class="tournament-logo">
-                    <img src="https://media.api-sports.io/football/leagues/140.png" alt="La Liga">
+        <div class="tournament-group">
+            <div class="tournament-group-header" onclick="toggleAccordion(this)">
+                <div class="tournament-group-logo">
+                    <img src="https://media.api-sports.io/football/leagues/140.png" alt="">
                 </div>
-                <div class="tournament-info">
-                    <a href="tournament.html" class="tournament-name" style="text-decoration:none;color:inherit;">Испания, Ла Лига</a>
-                    <div class="tournament-matches">
-                        <span class="material-symbols-rounded" style="font-size:14px">sports_soccer</span>
-                        Матчи: 2
-                    </div>
+                <div class="tournament-group-info">
+                    <a href="tournament.html" class="tournament-group-name" style="text-decoration:none;color:inherit;">Испания, Ла Лига</a>
+                    <div class="tournament-group-meta">2 матча</div>
                 </div>
-                <span class="material-symbols-rounded tournament-chevron">expand_more</span>
+                <span class="material-symbols-rounded tournament-group-arrow">expand_more</span>
             </div>
-            <div class="tournament-content">
-                <div class="match-status">Завершен</div>
+            <div class="tournament-group-content">
                 <a href="match-post.html" class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Реал Мадрид</span>
-                        <div class="match-team-flag">
+                    <div class="match-row-time">FT</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/541.png" alt="">
+                            <span>Реал Мадрид</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-score-value">2</span>
-                        <span class="match-score-divider">:</span>
-                        <span class="match-score-value">2</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">Барселона</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/529.png" alt="">
+                            <span>Барселона</span>
                         </div>
                     </div>
+                    <div class="match-row-score">2<br>2</div>
+                    <span class="match-row-status">Завершен</span>
+                </a>
+                <a href="match-preview.html" class="match-row">
+                    <div class="match-row-time">22:00</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/530.png" alt="">
+                            <span>Атлетико</span>
+                        </div>
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/548.png" alt="">
+                            <span>Севилья</span>
+                        </div>
+                    </div>
+                    <div class="match-row-score">—<br>—</div>
+                    <span class="match-row-status">22:00</span>
                 </a>
             </div>
         </div>
 
         <!-- Serie A -->
-        <div class="tournament-card" data-tournament="serie-a">
-            <div class="tournament-header" onclick="toggleTournament(this.parentElement)">
-                <div class="tournament-logo">
-                    <img src="https://media.api-sports.io/football/leagues/135.png" alt="Serie A">
+        <div class="tournament-group">
+            <div class="tournament-group-header" onclick="toggleAccordion(this)">
+                <div class="tournament-group-logo">
+                    <img src="https://media.api-sports.io/football/leagues/135.png" alt="">
                 </div>
-                <div class="tournament-info">
-                    <div class="tournament-name">Италия, Серия А</div>
-                    <div class="tournament-matches">
-                        <span class="material-symbols-rounded" style="font-size:14px">sports_soccer</span>
-                        Матчи: 4
-                    </div>
+                <div class="tournament-group-info">
+                    <div class="tournament-group-name">Италия, Серия А</div>
+                    <div class="tournament-group-meta">4 матча</div>
                 </div>
-                <span class="material-symbols-rounded tournament-chevron">expand_more</span>
+                <span class="material-symbols-rounded tournament-group-arrow">expand_more</span>
             </div>
-            <div class="tournament-content">
-                <div class="match-status">Завершен</div>
-                <div class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Интер</span>
-                        <div class="match-team-flag">
+            <div class="tournament-group-content">
+                <a href="match-post.html" class="match-row">
+                    <div class="match-row-time">FT</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team winner">
                             <img src="https://media.api-sports.io/football/teams/505.png" alt="">
+                            <span>Интер</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-score-value">1</span>
-                        <span class="match-score-divider">:</span>
-                        <span class="match-score-value">0</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">Милан</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/489.png" alt="">
+                            <span>Милан</span>
                         </div>
                     </div>
-                </div>
+                    <div class="match-row-score">1<br>0</div>
+                    <span class="match-row-status">Завершен</span>
+                </a>
+                <a href="match-preview.html" class="match-row">
+                    <div class="match-row-time">20:00</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/496.png" alt="">
+                            <span>Ювентус</span>
+                        </div>
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/497.png" alt="">
+                            <span>Рома</span>
+                        </div>
+                    </div>
+                    <div class="match-row-score">—<br>—</div>
+                    <span class="match-row-status">20:00</span>
+                </a>
             </div>
         </div>
 
         <!-- RPL -->
-        <div class="tournament-card" data-tournament="rpl">
-            <div class="tournament-header" onclick="toggleTournament(this.parentElement)">
-                <div class="tournament-logo">
-                    <img src="https://media.api-sports.io/football/leagues/235.png" alt="RPL">
+        <div class="tournament-group">
+            <div class="tournament-group-header" onclick="toggleAccordion(this)">
+                <div class="tournament-group-logo">
+                    <img src="https://media.api-sports.io/football/leagues/235.png" alt="">
                 </div>
-                <div class="tournament-info">
-                    <div class="tournament-name">Россия, Премьер-лига</div>
-                    <div class="tournament-matches">
-                        <span class="material-symbols-rounded" style="font-size:14px">sports_soccer</span>
-                        Матчи: 8
-                    </div>
+                <div class="tournament-group-info">
+                    <div class="tournament-group-name">Россия, Премьер-лига</div>
+                    <div class="tournament-group-meta">8 матчей</div>
                 </div>
-                <span class="material-symbols-rounded tournament-chevron">expand_more</span>
+                <span class="material-symbols-rounded tournament-group-arrow">expand_more</span>
             </div>
-            <div class="tournament-content">
-                <div class="match-status">17:00</div>
-                <div class="match-row">
-                    <div class="match-team">
-                        <span class="match-team-name">Зенит</span>
-                        <div class="match-team-flag">
+            <div class="tournament-group-content">
+                <a href="match-preview.html" class="match-row">
+                    <div class="match-row-time">17:00</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/212.png" alt="">
+                            <span>Зенит</span>
                         </div>
-                    </div>
-                    <div class="match-score">
-                        <span class="match-time">17:00</span>
-                    </div>
-                    <div class="match-team right">
-                        <span class="match-team-name">Спартак</span>
-                        <div class="match-team-flag">
+                        <div class="match-row-team">
                             <img src="https://media.api-sports.io/football/teams/210.png" alt="">
+                            <span>Спартак</span>
                         </div>
                     </div>
+                    <div class="match-row-score">—<br>—</div>
+                    <span class="match-row-status">17:00</span>
+                </a>
+                <a href="match-preview.html" class="match-row">
+                    <div class="match-row-time">19:30</div>
+                    <div class="match-row-teams">
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/211.png" alt="">
+                            <span>ЦСКА</span>
+                        </div>
+                        <div class="match-row-team">
+                            <img src="https://media.api-sports.io/football/teams/213.png" alt="">
+                            <span>Динамо</span>
+                        </div>
+                    </div>
+                    <div class="match-row-score">—<br>—</div>
+                    <span class="match-row-status">19:30</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Фильтры</span>
+                <button class="modal-close" onclick="closeFilterModal()">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 style="margin-bottom:12px;font-size:14px;color:var(--ws-text-secondary)">Турниры</h4>
+                <div class="filter-option selected" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Все турниры</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Премьер-лига (Англия)</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Ла Лига (Испания)</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Серия А (Италия)</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Премьер-лига (Россия)</span>
+                </div>
+                
+                <h4 style="margin:24px 0 12px;font-size:14px;color:var(--ws-text-secondary)">Статус матча</h4>
+                <div class="filter-option selected" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Все матчи</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Только LIVE</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Предстоящие</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Завершённые</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Floating WIN Button -->
-    <a href="win-ai.html" class="floating-win-btn">
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Анализирую матчи дня...')">
         <span>WIN</span>
     </a>
 
@@ -243,7 +326,7 @@
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
-            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item" onclick="showLiveOnly()">Live</a>
             <a href="#" class="bottom-nav-item">
                 <span class="material-symbols-rounded">favorite</span>
             </a>
@@ -257,16 +340,49 @@
     </nav>
 
     <script>
-        function toggleTournament(card) {
-            card.classList.toggle('expanded');
+        // Accordion toggle
+        function toggleAccordion(header) {
+            header.classList.toggle('open');
+            const content = header.nextElementSibling;
+            content.classList.toggle('open');
         }
 
         // Date picker
-        document.querySelectorAll('.date-item').forEach(item => {
+        document.querySelectorAll('.date-item:not(.date-item-calendar)').forEach(item => {
             item.addEventListener('click', function() {
                 document.querySelectorAll('.date-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // Filter modal
+        function openFilterModal() {
+            document.getElementById('filterModal').classList.add('open');
+        }
+
+        function closeFilterModal() {
+            document.getElementById('filterModal').classList.remove('open');
+        }
+
+        function toggleFilter(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Search
+        function openSearch() {
+            alert('Поиск: команды, игроки, турниры...');
+        }
+
+        // Show only live matches
+        function showLiveOnly() {
+            alert('Фильтр: только LIVE матчи');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('filterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFilterModal();
+            }
         });
     </script>
 </body>
