@@ -73,7 +73,7 @@
             gap: 12px;
         }
         .card-stat-item {
-            background: var(--ws-bg-secondary);
+            background: var(--ws-bg-tertiary);
             padding: 16px;
             border-radius: var(--ws-radius-md);
             text-align: center;
@@ -95,7 +95,11 @@
             gap: 12px;
             padding: 14px 0;
             border-bottom: 1px solid var(--ws-border);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s;
         }
+        .match-history-item:active { background: var(--ws-bg-tertiary); }
         .match-history-item:last-child { border-bottom: none; }
         .match-history-date {
             width: 48px;
@@ -136,22 +140,6 @@
         }
         .history-card.yellow { background: #EAB308; }
         .history-card.red { background: #EF4444; }
-        .avg-stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .avg-stat-row:last-child { border-bottom: none; }
-        .avg-stat-label {
-            font-size: 13px;
-            color: var(--ws-text-secondary);
-        }
-        .avg-stat-value {
-            font-size: 14px;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
@@ -160,13 +148,15 @@
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: #374151; color: white;">
+    <div class="header" style="background: #374151; border: none;">
         <a href="index.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Арбитр</div>
-        <div class="header-actions" style="color: white;">
-            <span class="material-symbols-rounded">share</span>
+        <div class="header-actions">
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">share</span>
+            </button>
         </div>
     </div>
 
@@ -194,12 +184,13 @@
     </div>
 
     <div class="tabs">
-        <div class="tab active">Обзор</div>
-        <div class="tab">Статистика</div>
-        <div class="tab">Матчи</div>
+        <div class="tab active" data-tab="overview">Обзор</div>
+        <div class="tab" data-tab="stats">Статистика</div>
+        <div class="tab" data-tab="matches">Матчи</div>
     </div>
 
-    <div class="content" style="padding-bottom: 120px;">
+    <!-- Tab: Overview -->
+    <div class="content tab-content active" id="tab-overview">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -231,32 +222,39 @@
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">style</span>
-                    Статистика карточек
+                    Карточки (сезон)
                 </div>
-                <span style="font-size: 12px; color: var(--ws-text-secondary);">Сезон 2024/25</span>
             </div>
             <div class="card-body">
                 <div class="card-stats-grid">
                     <div class="card-stat-item">
                         <div class="card-stat-value yellow">67</div>
-                        <div class="card-stat-label">Жёлтые карточки</div>
+                        <div class="card-stat-label">Жёлтые</div>
                     </div>
                     <div class="card-stat-item">
                         <div class="card-stat-value red">3</div>
-                        <div class="card-stat-label">Красные карточки</div>
-                    </div>
-                    <div class="card-stat-item">
-                        <div class="card-stat-value">8</div>
-                        <div class="card-stat-label">Пенальти</div>
-                    </div>
-                    <div class="card-stat-item">
-                        <div class="card-stat-value">16</div>
-                        <div class="card-stat-label">Матчей</div>
+                        <div class="card-stat-label">Красные</div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- WIN AI внизу - не навязчивый по аудиту -->
+        <div class="card" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: none;">
+            <div class="card-body" style="color: white;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <div style="width: 32px; height: 32px; background: var(--ws-accent-orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px;">WIN</div>
+                    <span style="font-weight: 700;">WIN AI Insight</span>
+                </div>
+                <p style="font-size: 13px; line-height: 1.5; opacity: 0.9; margin: 0;">
+                    Майкл Оливер показывает в среднем 4.2 жёлтых карточки за матч — на 15% выше среднего по лиге. 
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Stats -->
+    <div class="content tab-content" id="tab-stats">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -265,25 +263,42 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="avg-stat-row">
-                    <span class="avg-stat-label">ЖК за матч</span>
-                    <span class="avg-stat-value">4.2</span>
-                </div>
-                <div class="avg-stat-row">
-                    <span class="avg-stat-label">КК за матч</span>
-                    <span class="avg-stat-value">0.18</span>
-                </div>
-                <div class="avg-stat-row">
-                    <span class="avg-stat-label">Фолов за матч</span>
-                    <span class="avg-stat-value">22.3</span>
-                </div>
-                <div class="avg-stat-row">
-                    <span class="avg-stat-label">Пенальти за матч</span>
-                    <span class="avg-stat-value">0.5</span>
-                </div>
-                <div class="avg-stat-row">
-                    <span class="avg-stat-label">Голов в его матчах</span>
-                    <span class="avg-stat-value">2.8</span>
+                <div class="bar-chart">
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">ЖК/матч</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 84%; background: #EAB308;"></div>
+                        </div>
+                        <span class="bar-chart-value">4.2</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">КК/матч</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill red" style="width: 18%;"></div>
+                        </div>
+                        <span class="bar-chart-value">0.18</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Фолы/матч</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="bar-chart-value">22.3</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Пен./матч</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="bar-chart-value">0.5</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Голов</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 56%;"></div>
+                        </div>
+                        <span class="bar-chart-value">2.8</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -291,72 +306,95 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span class="material-symbols-rounded">history</span>
-                    Последние матчи
+                    <span class="material-symbols-rounded">compare</span>
+                    Сравнение со средним
                 </div>
             </div>
-            <div class="card-body" style="padding: 0 16px;">
-                <a href="match-preview.html" class="match-history-item" style="text-decoration: none; color: inherit;">
-                    <div class="match-history-date">
-                        <div class="match-history-date-day">22</div>
-                        <div class="match-history-date-month">дек</div>
-                    </div>
-                    <div class="match-history-info">
-                        <div class="match-history-teams">Манчестер Сити 1-2 Астон Вилла</div>
-                        <div class="match-history-league">Премьер-лига</div>
-                    </div>
-                    <div class="match-history-cards">
-                        <div class="history-card yellow">5</div>
-                        <div class="history-card red">1</div>
-                    </div>
-                </a>
-                <div class="match-history-item">
-                    <div class="match-history-date">
-                        <div class="match-history-date-day">15</div>
-                        <div class="match-history-date-month">дек</div>
-                    </div>
-                    <div class="match-history-info">
-                        <div class="match-history-teams">Челси 2-2 Эвертон</div>
-                        <div class="match-history-league">Премьер-лига</div>
-                    </div>
-                    <div class="match-history-cards">
-                        <div class="history-card yellow">4</div>
-                    </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">ЖК vs среднее лиги</span>
+                    <span class="stat-value text-red">+15%</span>
                 </div>
-                <div class="match-history-item">
-                    <div class="match-history-date">
-                        <div class="match-history-date-day">08</div>
-                        <div class="match-history-date-month">дек</div>
-                    </div>
-                    <div class="match-history-info">
-                        <div class="match-history-teams">Тоттенхэм 3-0 Саутгемптон</div>
-                        <div class="match-history-league">Премьер-лига</div>
-                    </div>
-                    <div class="match-history-cards">
-                        <div class="history-card yellow">3</div>
-                    </div>
+                <div class="stat-row">
+                    <span class="stat-label">КК vs среднее лиги</span>
+                    <span class="stat-value text-green">−8%</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="card" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: none;">
-            <div class="card-body" style="color: white;">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                    <div style="width: 32px; height: 32px; background: var(--ws-accent-orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px;">WIN</div>
-                    <span style="font-weight: 700;">WIN AI Insight</span>
+                <div class="stat-row">
+                    <span class="stat-label">Пенальти vs среднее</span>
+                    <span class="stat-value">+5%</span>
                 </div>
-                <p style="font-size: 13px; line-height: 1.5; opacity: 0.9; margin: 0;">
-                    Майкл Оливер показывает в среднем 4.2 жёлтых карточки за матч — это на 15% выше среднего по лиге. 
-                    В играх с его участием командам стоит играть более аккуратно.
-                </p>
             </div>
         </div>
     </div>
 
-    <a href="win-ai.html" class="floating-win-btn">
+    <!-- Tab: Matches -->
+    <div class="content tab-content" id="tab-matches">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Последние матчи</div>
+
+        <a href="match-post.html" class="match-history-item">
+            <div class="match-history-date">
+                <div class="match-history-date-day">22</div>
+                <div class="match-history-date-month">дек</div>
+            </div>
+            <div class="match-history-info">
+                <div class="match-history-teams">Манчестер Сити 1-2 Астон Вилла</div>
+                <div class="match-history-league">Премьер-лига</div>
+            </div>
+            <div class="match-history-cards">
+                <div class="history-card yellow">5</div>
+                <div class="history-card red">1</div>
+            </div>
+        </a>
+
+        <a href="match-post.html" class="match-history-item">
+            <div class="match-history-date">
+                <div class="match-history-date-day">15</div>
+                <div class="match-history-date-month">дек</div>
+            </div>
+            <div class="match-history-info">
+                <div class="match-history-teams">Челси 2-2 Эвертон</div>
+                <div class="match-history-league">Премьер-лига</div>
+            </div>
+            <div class="match-history-cards">
+                <div class="history-card yellow">4</div>
+            </div>
+        </a>
+
+        <a href="match-post.html" class="match-history-item">
+            <div class="match-history-date">
+                <div class="match-history-date-day">08</div>
+                <div class="match-history-date-month">дек</div>
+            </div>
+            <div class="match-history-info">
+                <div class="match-history-teams">Тоттенхэм 3-0 Саутгемптон</div>
+                <div class="match-history-league">Премьер-лига</div>
+            </div>
+            <div class="match-history-cards">
+                <div class="history-card yellow">3</div>
+            </div>
+        </a>
+
+        <a href="match-post.html" class="match-history-item">
+            <div class="match-history-date">
+                <div class="match-history-date-day">01</div>
+                <div class="match-history-date-month">дек</div>
+            </div>
+            <div class="match-history-info">
+                <div class="match-history-teams">Арсенал 1-1 Фулхэм</div>
+                <div class="match-history-league">Премьер-лига</div>
+            </div>
+            <div class="match-history-cards">
+                <div class="history-card yellow">6</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Floating WIN Button -->
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Какой стиль судейства у Оливера?')">
         <span>WIN</span>
     </a>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
@@ -374,10 +412,15 @@
     </nav>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
                 this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabId).classList.add('active');
             });
         });
     </script>
