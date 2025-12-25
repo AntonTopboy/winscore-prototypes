@@ -12,241 +12,257 @@
     <style>
         .stadium-hero {
             height: 200px;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%), 
-                        url('https://media.api-sports.io/football/venues/550.png');
-            background-size: cover;
-            background-position: center;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800') center/cover;
+            position: relative;
+        }
+        .stadium-hero-content {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
             color: white;
         }
-        .stadium-name {
+        .stadium-name-big {
             font-size: 24px;
             font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
         .stadium-location {
             font-size: 14px;
-            opacity: 0.85;
+            opacity: 0.9;
+            margin-top: 4px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 4px;
+            gap: 4px;
         }
         .stadium-info-card {
-            background: var(--ws-bg-secondary);
-            margin: -24px 16px 16px;
+            background: var(--ws-bg-card);
+            margin: -24px 16px 0;
             border-radius: var(--ws-radius-lg);
-            padding: 20px;
             position: relative;
-            z-index: 10;
+            z-index: 1;
+            box-shadow: var(--ws-shadow);
+            overflow: hidden;
+        }
+        .stadium-stats-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--ws-border);
         }
-        .stadium-info-item {
+        .stadium-stat {
+            padding: 16px;
             text-align: center;
+            border-right: 1px solid var(--ws-border);
         }
-        .stadium-info-value {
-            font-size: 18px;
+        .stadium-stat:last-child { border-right: none; }
+        .stadium-stat-value {
+            font-size: 20px;
             font-weight: 700;
+            color: var(--ws-accent-orange);
         }
-        .stadium-info-label {
-            font-size: 11px;
+        .stadium-stat-label {
+            font-size: 10px;
             color: var(--ws-text-tertiary);
             text-transform: uppercase;
+            margin-top: 2px;
         }
-        .home-team-link {
-            grid-column: 1 / -1;
+        .team-badge {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            background: var(--ws-bg-tertiary);
-            border-radius: var(--ws-radius-md);
-            text-decoration: none;
-            color: var(--ws-text-primary);
-            margin-top: 8px;
-            transition: all 0.2s;
+            gap: 12px;
+            padding: 16px;
         }
-        .home-team-link:active { transform: scale(0.98); }
-        .home-team-link img {
-            width: 28px;
-            height: 28px;
+        .team-badge-logo {
+            width: 48px;
+            height: 48px;
         }
-        .home-team-name {
+        .team-badge-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .team-badge-info { flex: 1; }
+        .team-badge-name {
+            font-size: 16px;
             font-weight: 600;
-            font-size: 14px;
+        }
+        .team-badge-label {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .upcoming-match {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 16px;
+            border-radius: var(--ws-radius-lg);
+            padding: 16px;
+            color: white;
+        }
+        .upcoming-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        .upcoming-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .upcoming-team {
+            text-align: center;
+        }
+        .upcoming-team-logo {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 6px;
+            background: white;
+            border-radius: 50%;
+            padding: 4px;
+        }
+        .upcoming-team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .upcoming-team-name {
+            font-size: 12px;
+        }
+        .upcoming-vs {
+            text-align: center;
+        }
+        .upcoming-time {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .upcoming-date {
+            font-size: 11px;
+            opacity: 0.7;
         }
         .map-placeholder {
             height: 160px;
-            background: var(--ws-bg-tertiary);
+            background: #E5E5E5;
             border-radius: var(--ws-radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--ws-text-tertiary);
+            gap: 8px;
         }
-        .gallery-scroll {
+        .gallery-row {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             overflow-x: auto;
-            padding: 0 16px 16px;
-            -webkit-overflow-scrolling: touch;
+            padding: 0 16px;
+            scrollbar-width: none;
         }
-        .gallery-scroll::-webkit-scrollbar { display: none; }
+        .gallery-row::-webkit-scrollbar { display: none; }
         .gallery-item {
-            flex: 0 0 200px;
-            height: 120px;
+            width: 140px;
+            height: 100px;
+            flex-shrink: 0;
             border-radius: var(--ws-radius-md);
             overflow: hidden;
-            background: var(--ws-bg-secondary);
+            background: #E5E5E5;
         }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .next-match-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: var(--ws-radius-lg);
-            padding: 16px;
-            color: white;
-            text-decoration: none;
-            display: block;
-            transition: transform 0.2s;
-        }
-        .next-match-card:active { transform: scale(0.98); }
-        .next-match-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: 12px;
-        }
-        .next-match-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .next-match-team {
-            text-align: center;
-            flex: 1;
-        }
-        .next-match-logo {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 6px;
-            background: white;
-            border-radius: 50%;
-            padding: 6px;
-        }
-        .next-match-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .next-match-name {
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .next-match-vs {
-            text-align: center;
-            padding: 0 12px;
-        }
-        .next-match-time {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .next-match-date {
-            font-size: 11px;
-            opacity: 0.7;
-        }
     </style>
 </head>
 <body>
-    <div class="status-bar">
+    <!-- Status Bar -->
+    <div class="status-bar" style="position: absolute; top: 0; left: 0; right: 0; z-index: 10; color: white; background: transparent;">
         <span>18:05</span>
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: transparent; position: absolute; left: 0; right: 0; z-index: 100; border: none;">
+    <!-- Header -->
+    <div class="header" style="position: absolute; top: 44px; left: 0; right: 0; z-index: 10; background: transparent; color: white;">
         <a href="team.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Стадион</div>
-        <div class="header-actions">
-            <button class="header-action" style="color: white;">
-                <span class="material-symbols-rounded">share</span>
-            </button>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">share</span>
         </div>
     </div>
 
+    <!-- Stadium Hero -->
     <div class="stadium-hero">
-        <div class="stadium-name">Anfield</div>
-        <div class="stadium-location">
-            <span class="material-symbols-rounded" style="font-size: 18px;">location_on</span>
-            Ливерпуль, Англия
+        <div class="stadium-hero-content">
+            <div class="stadium-name-big">Anfield</div>
+            <div class="stadium-location">
+                <span class="material-symbols-rounded" style="font-size: 16px;">location_on</span>
+                Ливерпуль, Англия
+            </div>
         </div>
     </div>
 
+    <!-- Stadium Info Card -->
     <div class="stadium-info-card">
-        <div class="stadium-info-item">
-            <div class="stadium-info-value">53,394</div>
-            <div class="stadium-info-label">Вместимость</div>
+        <div class="stadium-stats-row">
+            <div class="stadium-stat">
+                <div class="stadium-stat-value">53,394</div>
+                <div class="stadium-stat-label">Вместимость</div>
+            </div>
+            <div class="stadium-stat">
+                <div class="stadium-stat-value">1884</div>
+                <div class="stadium-stat-label">Год открытия</div>
+            </div>
+            <div class="stadium-stat">
+                <div class="stadium-stat-value">101×68</div>
+                <div class="stadium-stat-label">Размер поля</div>
+            </div>
         </div>
-        <div class="stadium-info-item">
-            <div class="stadium-info-value">1884</div>
-            <div class="stadium-info-label">Год постройки</div>
-        </div>
-        <div class="stadium-info-item">
-            <div class="stadium-info-value">101×68</div>
-            <div class="stadium-info-label">Размер поля (м)</div>
-        </div>
-        <div class="stadium-info-item">
-            <div class="stadium-info-value">Натур.</div>
-            <div class="stadium-info-label">Газон</div>
-        </div>
-        <a href="team.html" class="home-team-link">
-            <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-            <span class="home-team-name">Ливерпуль</span>
-            <span class="material-symbols-rounded" style="font-size: 18px; color: var(--ws-text-secondary);">chevron_right</span>
+        <a href="team.html" class="team-badge" style="text-decoration: none; color: inherit;">
+            <div class="team-badge-logo">
+                <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            </div>
+            <div class="team-badge-info">
+                <div class="team-badge-name">Ливерпуль</div>
+                <div class="team-badge-label">Домашняя команда</div>
+            </div>
+            <span class="material-symbols-rounded" style="color: var(--ws-text-tertiary);">chevron_right</span>
         </a>
     </div>
 
-    <div class="tabs" style="margin-top: 0;">
-        <div class="tab active" data-tab="overview">Обзор</div>
-        <div class="tab" data-tab="matches">Матчи</div>
-        <div class="tab" data-tab="stats">Статистика</div>
-        <div class="tab" data-tab="gallery">Галерея</div>
+    <!-- Tabs -->
+    <div class="tabs" style="margin-top: 16px;">
+        <div class="tab active">Обзор</div>
+        <div class="tab">История</div>
+        <div class="tab">Матчи</div>
+        <div class="tab">Галерея</div>
     </div>
 
-    <!-- Tab: Overview -->
-    <div class="content tab-content active" id="tab-overview">
-        <a href="match-preview.html" class="next-match-card">
-            <div class="next-match-label">Ближайший матч • Boxing Day</div>
-            <div class="next-match-content">
-                <div class="next-match-team">
-                    <div class="next-match-logo">
+    <div class="content" style="padding-bottom: 120px;">
+        <!-- Upcoming Match -->
+        <a href="match-preview.html" class="upcoming-match" style="text-decoration: none; display: block;">
+            <div class="upcoming-label">Ближайший матч</div>
+            <div class="upcoming-teams">
+                <div class="upcoming-team">
+                    <div class="upcoming-team-logo">
                         <img src="https://media.api-sports.io/football/teams/40.png" alt="">
                     </div>
-                    <div class="next-match-name">Ливерпуль</div>
+                    <div class="upcoming-team-name">Ливерпуль</div>
                 </div>
-                <div class="next-match-vs">
-                    <div class="next-match-time">20:45</div>
-                    <div class="next-match-date">26 декабря</div>
+                <div class="upcoming-vs">
+                    <div class="upcoming-time">20:45</div>
+                    <div class="upcoming-date">26 декабря</div>
                 </div>
-                <div class="next-match-team">
-                    <div class="next-match-logo">
+                <div class="upcoming-team">
+                    <div class="upcoming-team-logo">
                         <img src="https://media.api-sports.io/football/teams/46.png" alt="">
                     </div>
-                    <div class="next-match-name">Лестер</div>
+                    <div class="upcoming-team-name">Лестер</div>
                 </div>
             </div>
         </a>
 
-        <div class="card mt-16">
+        <!-- About Stadium -->
+        <div class="card">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">info</span>
@@ -255,169 +271,38 @@
             </div>
             <div class="card-body">
                 <div class="stat-row">
-                    <span class="stat-label">Адрес</span>
-                    <span class="stat-value">Anfield Rd, L4 0TH</span>
+                    <span class="stat-label">Официальное название</span>
+                    <span class="stat-value">Anfield</span>
                 </div>
                 <div class="stat-row">
-                    <span class="stat-label">Открыт</span>
+                    <span class="stat-label">Город</span>
+                    <span class="stat-value">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Ливерпуль</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Вместимость</span>
+                    <span class="stat-value">53,394</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Год постройки</span>
                     <span class="stat-value">1884</span>
                 </div>
                 <div class="stat-row">
-                    <span class="stat-label">Реконструкция</span>
-                    <span class="stat-value">2024</span>
+                    <span class="stat-label">Последняя реконструкция</span>
+                    <span class="stat-value">2023</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Покрытие</span>
+                    <span class="stat-value">Натуральный газон</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Размер поля</span>
+                    <span class="stat-value">101 × 68 м</span>
                 </div>
             </div>
         </div>
 
+        <!-- Location -->
         <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">history_edu</span>
-                    Легенда
-                </div>
-            </div>
-            <div class="card-body">
-                <p style="font-size: 13px; line-height: 1.6; color: var(--ws-text-secondary); margin: 0;">
-                    Энфилд — легендарный стадион с уникальной атмосферой. 
-                    Трибуна «The Kop» и гимн «You'll Never Walk Alone» — 
-                    одни из самых узнаваемых ритуалов в мировом футболе.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tab: Matches -->
-    <div class="content tab-content" id="tab-matches">
-        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Предстоящие на Энфилде</div>
-
-        <a href="match-preview.html" class="match-card">
-            <div class="match-card-header">
-                <span class="match-card-league">АПЛ • 26 декабря</span>
-                <span class="match-card-status upcoming">20:45</span>
-            </div>
-            <div class="match-card-teams">
-                <div class="match-card-team">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Ливерпуль</span>
-                </div>
-                <div class="match-card-score">
-                    <span class="match-card-time">20:45</span>
-                </div>
-                <div class="match-card-team away">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/46.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Лестер</span>
-                </div>
-            </div>
-        </a>
-
-        <div style="font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Последние домашние</div>
-
-        <a href="match-post.html" class="match-card">
-            <div class="match-card-header">
-                <span class="match-card-league">АПЛ • 15 декабря</span>
-                <span class="match-card-status finished">Завершен</span>
-            </div>
-            <div class="match-card-teams">
-                <div class="match-card-team">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Ливерпуль</span>
-                </div>
-                <div class="match-card-score">
-                    <span class="match-card-score-num">6</span>
-                    <span style="color: var(--ws-text-tertiary)">:</span>
-                    <span class="match-card-score-num">3</span>
-                </div>
-                <div class="match-card-team away">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Тоттенхэм</span>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <!-- Tab: Stats -->
-    <div class="content tab-content" id="tab-stats">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">bar_chart</span>
-                    Домашние матчи 2024/25
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value green">78%</div>
-                        <div class="stats-grid-label">Побед дома</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value">9</div>
-                        <div class="stats-grid-label">Матчей</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value orange">24</div>
-                        <div class="stats-grid-label">Голов забито</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value">6</div>
-                        <div class="stats-grid-label">Голов пропущено</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">groups</span>
-                    Посещаемость
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="bar-chart">
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">Ср. посещ.</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill green" style="width: 98%;"></div>
-                        </div>
-                        <span class="bar-chart-value">52.8K</span>
-                    </div>
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">Заполнен.</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill" style="width: 99%;"></div>
-                        </div>
-                        <span class="bar-chart-value">99%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tab: Gallery -->
-    <div class="content tab-content" id="tab-gallery">
-        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Фотографии</div>
-        <div class="gallery-scroll" style="margin: 0 -16px;">
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-        </div>
-
-        <div class="card mt-16">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">location_on</span>
@@ -426,14 +311,117 @@
             </div>
             <div class="card-body">
                 <div class="map-placeholder">
-                    <span class="material-symbols-rounded" style="font-size: 48px;">map</span>
+                    <span class="material-symbols-rounded">map</span>
+                    Карта
+                </div>
+                <div style="margin-top: 12px;">
+                    <div style="font-size: 14px; font-weight: 500;">Anfield Road</div>
+                    <div style="font-size: 13px; color: var(--ws-text-secondary);">Liverpool L4 0TH, UK</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">analytics</span>
+                    Статистика сезона
+                </div>
+                <span style="font-size: 12px; color: var(--ws-text-secondary);">2024/25</span>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Домашних матчей</span>
+                    <span class="stat-value">9</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Победы дома</span>
+                    <span class="stat-value text-green">8</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Ничьи</span>
+                    <span class="stat-value">1</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Поражения</span>
+                    <span class="stat-value text-red">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Голы забито (дома)</span>
+                    <span class="stat-value">26</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Голы пропущено (дома)</span>
+                    <span class="stat-value">6</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Средняя посещаемость</span>
+                    <span class="stat-value">52,847</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">photo_library</span>
+                    Галерея
+                </div>
+            </div>
+        </div>
+        <div class="gallery-row" style="margin-top: -8px; margin-bottom: 16px;">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400" alt="">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=400" alt="">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400" alt="">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=400" alt="">
+            </div>
+        </div>
+
+        <!-- History (позитивный tone of voice по аудиту) -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">history</span>
+                    История
+                </div>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 14px; line-height: 1.6; color: var(--ws-text-secondary);">
+                    «Энфилд» — один из самых легендарных стадионов в мире футбола. 
+                    Домашняя арена «Ливерпуля» с 1892 года. Знаменит своей атмосферой 
+                    и трибуной Kop, где фанаты исполняют гимн клуба «You'll Never Walk Alone».
+                </p>
+                <p style="font-size: 14px; line-height: 1.6; color: var(--ws-text-secondary); margin-top: 12px;">
+                    В 2016 году была завершена реконструкция главной трибуны, 
+                    а в 2023 году расширена трибуна Anfield Road до 61,000 мест.
+                </p>
+            </div>
+        </div>
+
+        <!-- WIN AI (внизу, ненавязчиво) -->
+        <div class="card" style="background: var(--ws-bg-primary); border: 1px dashed var(--ws-border);">
+            <div class="card-body" style="text-align: center; padding: 20px;">
+                <div style="font-size: 13px; color: var(--ws-text-secondary); margin-bottom: 8px;">Хотите узнать больше о стадионе?</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--ws-accent-orange); cursor: pointer;">
+                    <span style="font-size: 16px;">🤖</span>
+                    <span style="font-weight: 600; font-size: 14px;">Спросить WIN AI</span>
+                    <span class="material-symbols-rounded" style="font-size: 18px;">arrow_forward</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Floating WIN Button -->
-    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Какая атмосфера на Энфилде?')">
+    <a href="win-ai.html" class="floating-win-btn">
         <span>WIN</span>
     </a>
 
@@ -455,15 +443,10 @@
     </nav>
 
     <script>
-        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
                 this.classList.add('active');
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById('tab-' + tabId).classList.add('active');
             });
         });
     </script>
