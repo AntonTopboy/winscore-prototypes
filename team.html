@@ -68,16 +68,10 @@
             height: 44px;
             background: rgba(255,255,255,0.15);
             border-radius: 50%;
-            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .action-icon-btn:active {
-            transform: scale(0.9);
-            background: rgba(255,255,255,0.25);
         }
         .action-icon-btn .material-symbols-rounded {
             color: white;
@@ -87,22 +81,19 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
+            padding: 16px;
         }
         .squad-player {
             text-align: center;
-            text-decoration: none;
-            color: inherit;
             cursor: pointer;
-            transition: transform 0.2s;
         }
-        .squad-player:active { transform: scale(0.95); }
         .squad-player-photo {
             width: 56px;
             height: 56px;
             border-radius: 50%;
             margin: 0 auto 6px;
             overflow: hidden;
-            background: var(--ws-bg-tertiary);
+            background: var(--ws-bg-primary);
         }
         .squad-player-photo img {
             width: 100%;
@@ -120,14 +111,11 @@
         }
         .next-match-card {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 16px;
             border-radius: var(--ws-radius-lg);
             padding: 16px;
             color: white;
-            text-decoration: none;
-            display: block;
-            transition: transform 0.2s;
         }
-        .next-match-card:active { transform: scale(0.98); }
         .next-match-label {
             font-size: 11px;
             text-transform: uppercase;
@@ -172,26 +160,69 @@
             font-size: 11px;
             opacity: 0.7;
         }
+        .transfer-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .transfer-item:last-child { border-bottom: none; }
+        .transfer-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .transfer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .transfer-info { flex: 1; }
+        .transfer-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .transfer-detail {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .transfer-type {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: var(--ws-radius-sm);
+        }
+        .transfer-type.in {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--ws-accent-green);
+        }
+        .transfer-type.out {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--ws-accent-red);
+        }
     </style>
 </head>
 <body>
+    <!-- Status Bar -->
     <div class="status-bar">
         <span>18:05</span>
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: #c8102e; border: none;">
+    <!-- Header -->
+    <div class="header" style="background: #c8102e; color: white;">
         <a href="index.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Команда</div>
-        <div class="header-actions">
-            <button class="header-action" style="color: white;">
-                <span class="material-symbols-rounded">search</span>
-            </button>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">search</span>
         </div>
     </div>
 
+    <!-- Team Hero -->
     <div class="team-hero">
         <div class="team-logo-big">
             <img src="https://media.api-sports.io/football/teams/40.png" alt="Liverpool">
@@ -213,29 +244,29 @@
             </div>
         </div>
         <div class="action-row">
-            <button class="action-icon-btn" onclick="toggleFavorite(this)">
+            <div class="action-icon-btn">
                 <span class="material-symbols-rounded">favorite_border</span>
-            </button>
-            <button class="action-icon-btn">
+            </div>
+            <div class="action-icon-btn">
                 <span class="material-symbols-rounded">notifications_none</span>
-            </button>
-            <button class="action-icon-btn">
+            </div>
+            <div class="action-icon-btn">
                 <span class="material-symbols-rounded">share</span>
-            </button>
+            </div>
         </div>
     </div>
 
-    <!-- Табы - 4 штуки по аудиту -->
+    <!-- Tabs (по аудиту: убрали "Состав" как дубль "Статистики", упростили до 4) -->
     <div class="tabs">
-        <div class="tab active" data-tab="overview">Обзор</div>
-        <div class="tab" data-tab="squad">Состав</div>
-        <div class="tab" data-tab="matches">Матчи</div>
-        <div class="tab" data-tab="stats">Статистика</div>
+        <div class="tab active">Обзор</div>
+        <div class="tab">Матчи</div>
+        <div class="tab">Состав</div>
+        <div class="tab">Инфо</div>
     </div>
 
-    <!-- Tab: Overview -->
-    <div class="content tab-content active" id="tab-overview">
-        <a href="match-preview.html" class="next-match-card">
+    <div class="content" style="padding-bottom: 120px;">
+        <!-- Next Match -->
+        <a href="match-preview.html" class="next-match-card" style="text-decoration: none; display: block;">
             <div class="next-match-label">Следующий матч • Премьер-лига</div>
             <div class="next-match-content">
                 <div class="next-match-team">
@@ -257,7 +288,8 @@
             </div>
         </a>
 
-        <div class="card mt-16">
+        <!-- Form -->
+        <div class="card">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">trending_up</span>
@@ -265,17 +297,18 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="form-indicator">
-                    <div class="form-item w">В</div>
-                    <div class="form-item w">В</div>
-                    <div class="form-item w">В</div>
-                    <div class="form-item d">Н</div>
-                    <div class="form-item w">В</div>
+                <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                    <div class="form-badge" style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div class="form-badge" style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div class="form-badge" style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div class="form-badge" style="width: 32px; height: 32px; background: #9CA3AF; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">Н</div>
+                    <div class="form-badge" style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
                 </div>
-                <div style="font-size: 12px; color: var(--ws-text-secondary); margin-top: 12px;">Последние 5 матчей: 4В 1Н 0П</div>
+                <div style="font-size: 12px; color: var(--ws-text-secondary);">Последние 5 матчей: 4В 1Н 0П</div>
             </div>
         </div>
 
+        <!-- Coach -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -283,7 +316,7 @@
                     Главный тренер
                 </div>
             </div>
-            <a href="coach.html" class="list-item">
+            <a href="coach.html" class="list-item" style="text-decoration: none; color: inherit;">
                 <div class="list-item-avatar">
                     <img src="https://media.api-sports.io/football/coachs/1.png" alt="">
                 </div>
@@ -295,6 +328,48 @@
             </a>
         </div>
 
+        <!-- Key Players -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">star</span>
+                    Ключевые игроки
+                </div>
+                <a href="#" style="font-size: 13px; color: var(--ws-accent-orange); text-decoration: none;">Все</a>
+            </div>
+            <div class="squad-grid">
+                <a href="player.html" class="squad-player" style="text-decoration: none; color: inherit;">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/306.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Салах</div>
+                    <div class="squad-player-position">ПП</div>
+                </a>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/303.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Ван Дейк</div>
+                    <div class="squad-player-position">ЦЗ</div>
+                </div>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/1112.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Арнольд</div>
+                    <div class="squad-player-position">ПЗ</div>
+                </div>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/1100.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Диаз</div>
+                    <div class="squad-player-position">ЛП</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stadium -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -302,7 +377,7 @@
                     Домашняя арена
                 </div>
             </div>
-            <a href="stadium.html" class="list-item">
+            <a href="stadium.html" class="list-item" style="text-decoration: none; color: inherit;">
                 <div class="list-item-avatar" style="border-radius: 8px;">
                     <img src="https://media.api-sports.io/football/venues/550.png" alt="" style="object-fit: cover;">
                 </div>
@@ -314,6 +389,39 @@
             </a>
         </div>
 
+        <!-- Recent Transfers -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">swap_horiz</span>
+                    Последние трансферы
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="transfer-item">
+                    <div class="transfer-photo">
+                        <img src="https://media.api-sports.io/football/players/2295.png" alt="">
+                    </div>
+                    <div class="transfer-info">
+                        <div class="transfer-name">Федерико Кьеза</div>
+                        <div class="transfer-detail">Из Ювентус • €12M</div>
+                    </div>
+                    <span class="transfer-type in">Вход</span>
+                </div>
+                <div class="transfer-item">
+                    <div class="transfer-photo">
+                        <img src="https://media.api-sports.io/football/players/180.png" alt="">
+                    </div>
+                    <div class="transfer-info">
+                        <div class="transfer-name">Тиаго Алькантара</div>
+                        <div class="transfer-detail">Свободный агент</div>
+                    </div>
+                    <span class="transfer-type out">Выход</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Club Info -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -338,239 +446,16 @@
                     <span class="stat-label">Титулы ЛЧ</span>
                     <span class="stat-value">6 🏆</span>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tab: Squad -->
-    <div class="content tab-content" id="tab-squad">
-        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Ключевые игроки</div>
-        <div class="squad-grid">
-            <a href="player.html" class="squad-player">
-                <div class="squad-player-photo">
-                    <img src="https://media.api-sports.io/football/players/306.png" alt="">
-                </div>
-                <div class="squad-player-name">Салах</div>
-                <div class="squad-player-position">ПП</div>
-            </a>
-            <a href="player.html" class="squad-player">
-                <div class="squad-player-photo">
-                    <img src="https://media.api-sports.io/football/players/303.png" alt="">
-                </div>
-                <div class="squad-player-name">Ван Дейк</div>
-                <div class="squad-player-position">ЦЗ</div>
-            </a>
-            <a href="player.html" class="squad-player">
-                <div class="squad-player-photo">
-                    <img src="https://media.api-sports.io/football/players/1112.png" alt="">
-                </div>
-                <div class="squad-player-name">Арнольд</div>
-                <div class="squad-player-position">ПЗ</div>
-            </a>
-            <a href="player.html" class="squad-player">
-                <div class="squad-player-photo">
-                    <img src="https://media.api-sports.io/football/players/1100.png" alt="">
-                </div>
-                <div class="squad-player-name">Диаз</div>
-                <div class="squad-player-position">ЛП</div>
-            </a>
-        </div>
-
-        <div style="font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Вратари</div>
-        <a href="player.html" class="player-card">
-            <span class="player-card-rank">1</span>
-            <div class="player-card-photo">
-                <img src="https://media.api-sports.io/football/players/18.png" alt="">
-            </div>
-            <div class="player-card-info">
-                <div class="player-card-name">Алиссон</div>
-                <div class="player-card-team">Вратарь • 32 года</div>
-            </div>
-        </a>
-
-        <div style="font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Защитники</div>
-        <a href="player.html" class="player-card">
-            <span class="player-card-rank">4</span>
-            <div class="player-card-photo">
-                <img src="https://media.api-sports.io/football/players/303.png" alt="">
-            </div>
-            <div class="player-card-info">
-                <div class="player-card-name">Вирджил ван Дейк</div>
-                <div class="player-card-team">ЦЗ • 33 года</div>
-            </div>
-        </a>
-    </div>
-
-    <!-- Tab: Matches -->
-    <div class="content tab-content" id="tab-matches">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <span style="font-size: 14px; font-weight: 600;">Предстоящие</span>
-            <button class="filter-btn" onclick="openFilterModal()">
-                <span class="material-symbols-rounded">tune</span>
-                Все
-            </button>
-        </div>
-
-        <a href="match-preview.html" class="match-card">
-            <div class="match-card-header">
-                <span class="match-card-league">АПЛ • 26 декабря</span>
-                <span class="match-card-status upcoming">20:45</span>
-            </div>
-            <div class="match-card-teams">
-                <div class="match-card-team">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Ливерпуль</span>
-                </div>
-                <div class="match-card-score">
-                    <span class="match-card-time">20:45</span>
-                </div>
-                <div class="match-card-team away">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/46.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Лестер</span>
-                </div>
-            </div>
-        </a>
-
-        <div style="font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Сыгранные</div>
-
-        <a href="match-post.html" class="match-card">
-            <div class="match-card-header">
-                <span class="match-card-league">АПЛ • 22 декабря</span>
-                <span class="match-card-status finished">Завершен</span>
-            </div>
-            <div class="match-card-teams">
-                <div class="match-card-team">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Тоттенхэм</span>
-                </div>
-                <div class="match-card-score">
-                    <span class="match-card-score-num">2</span>
-                    <span style="color: var(--ws-text-tertiary)">:</span>
-                    <span class="match-card-score-num">1</span>
-                </div>
-                <div class="match-card-team away">
-                    <div class="match-card-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                    </div>
-                    <span class="match-card-team-name">Ливерпуль</span>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <!-- Tab: Stats -->
-    <div class="content tab-content" id="tab-stats">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">sports_soccer</span>
-                    Сезон 2024/25
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value">17</div>
-                        <div class="stats-grid-label">Матчей</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value green">13</div>
-                        <div class="stats-grid-label">Побед</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value orange">44</div>
-                        <div class="stats-grid-label">Забито</div>
-                    </div>
-                    <div class="stats-grid-item">
-                        <div class="stats-grid-value">17</div>
-                        <div class="stats-grid-label">Пропущено</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">leaderboard</span>
-                    Атака / Защита
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="bar-chart">
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">Владение</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill" style="width: 58%;"></div>
-                        </div>
-                        <span class="bar-chart-value">58%</span>
-                    </div>
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">Удары/матч</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill" style="width: 72%;"></div>
-                        </div>
-                        <span class="bar-chart-value">14.2</span>
-                    </div>
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">Точ. пасы</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill green" style="width: 86%;"></div>
-                        </div>
-                        <span class="bar-chart-value">86%</span>
-                    </div>
-                    <div class="bar-chart-item">
-                        <span class="bar-chart-label">xG</span>
-                        <div class="bar-chart-track">
-                            <div class="bar-chart-fill" style="width: 78%;"></div>
-                        </div>
-                        <span class="bar-chart-value">38.4</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Filter Modal -->
-    <div class="modal-overlay" id="filterModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="modal-title">Фильтры</span>
-                <button class="modal-close" onclick="closeFilterModal()">
-                    <span class="material-symbols-rounded">close</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="filter-option selected" onclick="toggleFilter(this)">
-                    <div class="filter-option-check">
-                        <span class="material-symbols-rounded">check</span>
-                    </div>
-                    <span>Все турниры</span>
-                </div>
-                <div class="filter-option" onclick="toggleFilter(this)">
-                    <div class="filter-option-check">
-                        <span class="material-symbols-rounded">check</span>
-                    </div>
-                    <span>Премьер-лига</span>
-                </div>
-                <div class="filter-option" onclick="toggleFilter(this)">
-                    <div class="filter-option-check">
-                        <span class="material-symbols-rounded">check</span>
-                    </div>
-                    <span>Лига чемпионов</span>
+                <div class="stat-row">
+                    <span class="stat-label">Титулы АПЛ</span>
+                    <span class="stat-value">19 🏆</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Floating WIN Button -->
-    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Станет ли Ливерпуль чемпионом?')">
+    <a href="win-ai.html" class="floating-win-btn">
         <span>WIN</span>
     </a>
 
@@ -592,48 +477,11 @@
     </nav>
 
     <script>
-        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
                 this.classList.add('active');
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById('tab-' + tabId).classList.add('active');
             });
-        });
-
-        // Favorite toggle
-        function toggleFavorite(btn) {
-            const icon = btn.querySelector('.material-symbols-rounded');
-            if (icon.textContent === 'favorite_border') {
-                icon.textContent = 'favorite';
-                icon.style.color = '#EF4444';
-            } else {
-                icon.textContent = 'favorite_border';
-                icon.style.color = 'white';
-            }
-        }
-
-        // Filter modal
-        function openFilterModal() {
-            document.getElementById('filterModal').classList.add('open');
-        }
-
-        function closeFilterModal() {
-            document.getElementById('filterModal').classList.remove('open');
-        }
-
-        function toggleFilter(el) {
-            el.parentElement.querySelectorAll('.filter-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            el.classList.add('selected');
-        }
-
-        document.getElementById('filterModal').addEventListener('click', function(e) {
-            if (e.target === this) closeFilterModal();
         });
     </script>
 </body>
