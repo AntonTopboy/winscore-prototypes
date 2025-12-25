@@ -35,7 +35,7 @@
             margin-top: 4px;
         }
         .stadium-info-card {
-            background: var(--ws-bg-primary);
+            background: var(--ws-bg-secondary);
             margin: -24px 16px 16px;
             border-radius: var(--ws-radius-lg);
             padding: 20px;
@@ -64,12 +64,14 @@
             justify-content: center;
             gap: 10px;
             padding: 12px;
-            background: var(--ws-bg-secondary);
+            background: var(--ws-bg-tertiary);
             border-radius: var(--ws-radius-md);
             text-decoration: none;
             color: var(--ws-text-primary);
             margin-top: 8px;
+            transition: all 0.2s;
         }
+        .home-team-link:active { transform: scale(0.98); }
         .home-team-link img {
             width: 28px;
             height: 28px;
@@ -80,7 +82,7 @@
         }
         .map-placeholder {
             height: 160px;
-            background: var(--ws-bg-secondary);
+            background: var(--ws-bg-tertiary);
             border-radius: var(--ws-radius-md);
             display: flex;
             align-items: center;
@@ -91,7 +93,7 @@
             display: flex;
             gap: 12px;
             overflow-x: auto;
-            padding: 16px;
+            padding: 0 16px 16px;
             -webkit-overflow-scrolling: touch;
         }
         .gallery-scroll::-webkit-scrollbar { display: none; }
@@ -109,11 +111,14 @@
         }
         .next-match-card {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            margin: 16px;
             border-radius: var(--ws-radius-lg);
             padding: 16px;
             color: white;
+            text-decoration: none;
+            display: block;
+            transition: transform 0.2s;
         }
+        .next-match-card:active { transform: scale(0.98); }
         .next-match-label {
             font-size: 11px;
             text-transform: uppercase;
@@ -158,27 +163,6 @@
             font-size: 11px;
             opacity: 0.7;
         }
-        .season-stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-        .season-stat-card {
-            background: var(--ws-bg-secondary);
-            padding: 16px;
-            border-radius: var(--ws-radius-md);
-            text-align: center;
-        }
-        .season-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-        }
-        .season-stat-value.green { color: var(--ws-accent-green); }
-        .season-stat-label {
-            font-size: 11px;
-            color: var(--ws-text-secondary);
-            margin-top: 4px;
-        }
     </style>
 </head>
 <body>
@@ -187,13 +171,15 @@
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: transparent; position: absolute; left: 0; right: 0; z-index: 100;">
+    <div class="header" style="background: transparent; position: absolute; left: 0; right: 0; z-index: 100; border: none;">
         <a href="team.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Стадион</div>
-        <div class="header-actions" style="color: white;">
-            <span class="material-symbols-rounded">share</span>
+        <div class="header-actions">
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">share</span>
+            </button>
         </div>
     </div>
 
@@ -230,14 +216,15 @@
     </div>
 
     <div class="tabs" style="margin-top: 0;">
-        <div class="tab active">Обзор</div>
-        <div class="tab">Матчи</div>
-        <div class="tab">Статистика</div>
-        <div class="tab">Галерея</div>
+        <div class="tab active" data-tab="overview">Обзор</div>
+        <div class="tab" data-tab="matches">Матчи</div>
+        <div class="tab" data-tab="stats">Статистика</div>
+        <div class="tab" data-tab="gallery">Галерея</div>
     </div>
 
-    <div class="content" style="padding-bottom: 120px;">
-        <a href="match-preview.html" class="next-match-card" style="text-decoration: none; display: block;">
+    <!-- Tab: Overview -->
+    <div class="content tab-content active" id="tab-overview">
+        <a href="match-preview.html" class="next-match-card">
             <div class="next-match-label">Ближайший матч • Boxing Day</div>
             <div class="next-match-content">
                 <div class="next-match-team">
@@ -259,7 +246,7 @@
             </div>
         </a>
 
-        <div class="card">
+        <div class="card mt-16">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">info</span>
@@ -267,14 +254,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="stat-row">
-                    <span class="stat-label">Название</span>
-                    <span class="stat-value">Anfield</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Город</span>
-                    <span class="stat-value">Ливерпуль</span>
-                </div>
                 <div class="stat-row">
                     <span class="stat-label">Адрес</span>
                     <span class="stat-value">Anfield Rd, L4 0TH</span>
@@ -284,13 +263,161 @@
                     <span class="stat-value">1884</span>
                 </div>
                 <div class="stat-row">
-                    <span class="stat-label">Последняя реконструкция</span>
+                    <span class="stat-label">Реконструкция</span>
                     <span class="stat-value">2024</span>
                 </div>
             </div>
         </div>
 
         <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">history_edu</span>
+                    Легенда
+                </div>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 13px; line-height: 1.6; color: var(--ws-text-secondary); margin: 0;">
+                    Энфилд — легендарный стадион с уникальной атмосферой. 
+                    Трибуна «The Kop» и гимн «You'll Never Walk Alone» — 
+                    одни из самых узнаваемых ритуалов в мировом футболе.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Matches -->
+    <div class="content tab-content" id="tab-matches">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Предстоящие на Энфилде</div>
+
+        <a href="match-preview.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">АПЛ • 26 декабря</span>
+                <span class="match-card-status upcoming">20:45</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-time">20:45</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/46.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Лестер</span>
+                </div>
+            </div>
+        </a>
+
+        <div style="font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Последние домашние</div>
+
+        <a href="match-post.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">АПЛ • 15 декабря</span>
+                <span class="match-card-status finished">Завершен</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-score-num">6</span>
+                    <span style="color: var(--ws-text-tertiary)">:</span>
+                    <span class="match-card-score-num">3</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Тоттенхэм</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Tab: Stats -->
+    <div class="content tab-content" id="tab-stats">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">bar_chart</span>
+                    Домашние матчи 2024/25
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value green">78%</div>
+                        <div class="stats-grid-label">Побед дома</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">9</div>
+                        <div class="stats-grid-label">Матчей</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value orange">24</div>
+                        <div class="stats-grid-label">Голов забито</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">6</div>
+                        <div class="stats-grid-label">Голов пропущено</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">groups</span>
+                    Посещаемость
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Ср. посещ.</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 98%;"></div>
+                        </div>
+                        <span class="bar-chart-value">52.8K</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Заполнен.</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 99%;"></div>
+                        </div>
+                        <span class="bar-chart-value">99%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Gallery -->
+    <div class="content tab-content" id="tab-gallery">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Фотографии</div>
+        <div class="gallery-scroll" style="margin: 0 -16px;">
+            <div class="gallery-item">
+                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
+            </div>
+        </div>
+
+        <div class="card mt-16">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">location_on</span>
@@ -303,79 +430,14 @@
                 </div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">bar_chart</span>
-                    Статистика сезона
-                </div>
-                <span style="font-size: 12px; color: var(--ws-text-secondary);">Домашние матчи</span>
-            </div>
-            <div class="card-body">
-                <div class="season-stats-grid">
-                    <div class="season-stat-card">
-                        <div class="season-stat-value green">78%</div>
-                        <div class="season-stat-label">Побед дома</div>
-                    </div>
-                    <div class="season-stat-card">
-                        <div class="season-stat-value">9</div>
-                        <div class="season-stat-label">Матчей</div>
-                    </div>
-                    <div class="season-stat-card">
-                        <div class="season-stat-value">24</div>
-                        <div class="season-stat-label">Голов забито</div>
-                    </div>
-                    <div class="season-stat-card">
-                        <div class="season-stat-value">6</div>
-                        <div class="season-stat-label">Голов пропущено</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">photo_library</span>
-                    Галерея
-                </div>
-            </div>
-        </div>
-        <div class="gallery-scroll" style="margin-top: -8px;">
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-            <div class="gallery-item">
-                <img src="https://media.api-sports.io/football/venues/550.png" alt="">
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">history_edu</span>
-                    История
-                </div>
-            </div>
-            <div class="card-body">
-                <p style="font-size: 13px; line-height: 1.6; color: var(--ws-text-secondary); margin: 0;">
-                    Энфилд — легендарный домашний стадион «Ливерпуля», известный своей знаменитой 
-                    трибуной «The Kop» и атмосферой, которую игроки и болельщики со всего мира 
-                    считают одной из лучших в футболе. Традиционное исполнение гимна «You'll Never Walk Alone» 
-                    перед матчами стало одним из самых узнаваемых ритуалов в мировом футболе.
-                </p>
-            </div>
-        </div>
     </div>
 
-    <a href="win-ai.html" class="floating-win-btn">
+    <!-- Floating WIN Button -->
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Какая атмосфера на Энфилде?')">
         <span>WIN</span>
     </a>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
@@ -393,10 +455,15 @@
     </nav>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
                 this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabId).classList.add('active');
             });
         });
     </script>
