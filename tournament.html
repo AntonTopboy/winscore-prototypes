@@ -9,135 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .tournament-hero {
-            background: linear-gradient(135deg, #3d195b 0%, #2a1341 100%);
-            padding: 24px 16px;
-            color: white;
-            text-align: center;
-        }
-        .tournament-logo-big {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 12px;
-            background: white;
-            border-radius: 16px;
-            padding: 12px;
-        }
-        .tournament-logo-big img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .tournament-name-big {
-            font-size: 22px;
-            font-weight: 800;
-        }
-        .tournament-country {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
-        .tournament-season {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px;
-            border-radius: var(--ws-radius-full);
-            font-size: 13px;
-            margin-top: 12px;
-        }
-        .standings-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-        .standings-table th {
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--ws-text-tertiary);
-            text-transform: uppercase;
-            padding: 8px 4px;
-            text-align: center;
-        }
-        .standings-table th:nth-child(2) {
-            text-align: left;
-        }
-        .standings-table td {
-            padding: 10px 4px;
-            text-align: center;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .standings-table td:nth-child(2) {
-            text-align: left;
-        }
-        .standings-team {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .standings-team-logo {
-            width: 24px;
-            height: 24px;
-        }
-        .standings-team-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .standings-rank {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 11px;
-        }
-        .standings-rank.ucl { background: #10B981; color: white; }
-        .standings-rank.uel { background: #F59E0B; color: white; }
-        .standings-rank.uecl { background: #3B82F6; color: white; }
-        .standings-rank.rel { background: #EF4444; color: white; }
-        .top-scorer {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .top-scorer:last-child { border-bottom: none; }
-        .top-scorer-rank {
-            font-size: 16px;
-            font-weight: 700;
-            width: 24px;
-            color: var(--ws-text-tertiary);
-        }
-        .top-scorer-photo {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-        .top-scorer-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .top-scorer-info { flex: 1; }
-        .top-scorer-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .top-scorer-team {
-            font-size: 12px;
-            color: var(--ws-text-secondary);
-        }
-        .top-scorer-goals {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--ws-accent-orange);
-        }
-    </style>
 </head>
 <body>
     <div class="status-bar">
@@ -145,191 +16,328 @@
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: #3d195b; color: white;">
+    <!-- Header -->
+    <div class="header" style="background: linear-gradient(135deg, #3d195b 0%, #2a1341 100%); border: none;">
         <a href="index.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Турнир</div>
-        <div class="header-actions" style="color: white;">
-            <span class="material-symbols-rounded">favorite_border</span>
-            <span class="material-symbols-rounded">notifications_none</span>
+        <div class="header-actions">
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">favorite_border</span>
+            </button>
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">notifications_none</span>
+            </button>
         </div>
     </div>
 
-    <div class="tournament-hero">
-        <div class="tournament-logo-big">
+    <!-- Hero -->
+    <div class="hero" style="background: linear-gradient(135deg, #3d195b 0%, #2a1341 100%); color: white; padding-top: 0;">
+        <div class="hero-logo" style="background: white; border-radius: 16px;">
             <img src="https://media.api-sports.io/football/leagues/39.png" alt="Premier League">
         </div>
-        <div class="tournament-name-big">Премьер-лига</div>
-        <div class="tournament-country">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Англия</div>
-        <div class="tournament-season">Сезон 2024/25</div>
+        <div class="hero-title">Премьер-лига</div>
+        <div class="hero-subtitle" style="color: rgba(255,255,255,0.8);">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Англия</div>
+        <div class="hero-badge">Сезон 2024/25</div>
     </div>
 
+    <!-- Tabs - максимум 4 по аудиту -->
     <div class="tabs">
-        <div class="tab active">Таблица</div>
-        <div class="tab">Матчи</div>
-        <div class="tab">Бомбардиры</div>
-        <div class="tab">Новости</div>
+        <div class="tab active" data-tab="standings">Таблица</div>
+        <div class="tab" data-tab="matches">Матчи</div>
+        <div class="tab" data-tab="scorers">Бомбардиры</div>
+        <div class="tab" data-tab="info">Инфо</div>
     </div>
 
-    <div class="content" style="padding-bottom: 120px;">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">emoji_events</span>
-                    Турнирная таблица
-                </div>
-                <span style="font-size: 12px; color: var(--ws-text-secondary);">Тур 19</span>
-            </div>
-            <div class="card-body" style="padding: 0;">
-                <table class="standings-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Команда</th>
-                            <th>И</th>
-                            <th>В</th>
-                            <th>Н</th>
-                            <th>П</th>
-                            <th>РМ</th>
-                            <th>О</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr onclick="window.location='team.html'" style="cursor:pointer">
-                            <td><span class="standings-rank ucl">1</span></td>
-                            <td>
-                                <div class="standings-team">
-                                    <div class="standings-team-logo">
-                                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                                    </div>
-                                    <span>Ливерпуль</span>
-                                </div>
-                            </td>
-                            <td>17</td>
-                            <td>13</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>+27</td>
-                            <td><strong>42</strong></td>
-                        </tr>
-                        <tr>
-                            <td><span class="standings-rank ucl">2</span></td>
-                            <td>
-                                <div class="standings-team">
-                                    <div class="standings-team-logo">
-                                        <img src="https://media.api-sports.io/football/teams/42.png" alt="">
-                                    </div>
-                                    <span>Арсенал</span>
-                                </div>
-                            </td>
-                            <td>17</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>2</td>
-                            <td>+18</td>
-                            <td><strong>35</strong></td>
-                        </tr>
-                        <tr>
-                            <td><span class="standings-rank ucl">3</span></td>
-                            <td>
-                                <div class="standings-team">
-                                    <div class="standings-team-logo">
-                                        <img src="https://media.api-sports.io/football/teams/50.png" alt="">
-                                    </div>
-                                    <span>Ман Сити</span>
-                                </div>
-                            </td>
-                            <td>18</td>
-                            <td>10</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>+14</td>
-                            <td><strong>34</strong></td>
-                        </tr>
-                        <tr>
-                            <td><span class="standings-rank ucl">4</span></td>
-                            <td>
-                                <div class="standings-team">
-                                    <div class="standings-team-logo">
-                                        <img src="https://media.api-sports.io/football/teams/49.png" alt="">
-                                    </div>
-                                    <span>Челси</span>
-                                </div>
-                            </td>
-                            <td>17</td>
-                            <td>9</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>+12</td>
-                            <td><strong>32</strong></td>
-                        </tr>
-                        <tr>
-                            <td><span class="standings-rank uel">5</span></td>
-                            <td>
-                                <div class="standings-team">
-                                    <div class="standings-team-logo">
-                                        <img src="https://media.api-sports.io/football/teams/34.png" alt="">
-                                    </div>
-                                    <span>Ньюкасл</span>
-                                </div>
-                            </td>
-                            <td>17</td>
-                            <td>8</td>
-                            <td>6</td>
-                            <td>3</td>
-                            <td>+10</td>
-                            <td><strong>30</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <!-- Tab Content: Standings - КАРТОЧКИ вместо таблицы по аудиту -->
+    <div class="content tab-content active" id="tab-standings">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600;">Турнирная таблица</span>
+            <button class="filter-btn" onclick="openFilterModal()">
+                <span class="material-symbols-rounded">tune</span>
+                Тур 19
+            </button>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">sports_soccer</span>
-                    Лучшие бомбардиры
+        <!-- Team Cards вместо таблицы -->
+        <a href="team.html" class="team-card">
+            <div class="team-card-rank ucl">1</div>
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Ливерпуль</div>
+                <div class="team-card-meta">17 игр • +27</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">42</div>
+                    <div class="team-card-stat-label">Очки</div>
                 </div>
             </div>
-            <div class="card-body">
-                <a href="player.html" class="top-scorer" style="text-decoration: none; color: inherit;">
-                    <span class="top-scorer-rank">1</span>
-                    <div class="top-scorer-photo">
-                        <img src="https://media.api-sports.io/football/players/306.png" alt="">
-                    </div>
-                    <div class="top-scorer-info">
-                        <div class="top-scorer-name">Мохамед Салах</div>
-                        <div class="top-scorer-team">Ливерпуль</div>
-                    </div>
-                    <span class="top-scorer-goals">15</span>
-                </a>
-                <div class="top-scorer">
-                    <span class="top-scorer-rank">2</span>
-                    <div class="top-scorer-photo">
-                        <img src="https://media.api-sports.io/football/players/1100.png" alt="">
-                    </div>
-                    <div class="top-scorer-info">
-                        <div class="top-scorer-name">Эрлинг Холанд</div>
-                        <div class="top-scorer-team">Ман Сити</div>
-                    </div>
-                    <span class="top-scorer-goals">13</span>
-                </div>
-                <div class="top-scorer">
-                    <span class="top-scorer-rank">3</span>
-                    <div class="top-scorer-photo">
-                        <img src="https://media.api-sports.io/football/players/184.png" alt="">
-                    </div>
-                    <div class="top-scorer-info">
-                        <div class="top-scorer-name">Коул Палмер</div>
-                        <div class="top-scorer-team">Челси</div>
-                    </div>
-                    <span class="top-scorer-goals">11</span>
+        </a>
+
+        <a href="team.html" class="team-card">
+            <div class="team-card-rank ucl">2</div>
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/42.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Арсенал</div>
+                <div class="team-card-meta">17 игр • +18</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">35</div>
+                    <div class="team-card-stat-label">Очки</div>
                 </div>
             </div>
+        </a>
+
+        <a href="team.html" class="team-card">
+            <div class="team-card-rank ucl">3</div>
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/50.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Манчестер Сити</div>
+                <div class="team-card-meta">18 игр • +14</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">34</div>
+                    <div class="team-card-stat-label">Очки</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="team.html" class="team-card">
+            <div class="team-card-rank ucl">4</div>
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/49.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Челси</div>
+                <div class="team-card-meta">17 игр • +12</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">32</div>
+                    <div class="team-card-stat-label">Очки</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="team.html" class="team-card">
+            <div class="team-card-rank uel">5</div>
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/34.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Ньюкасл</div>
+                <div class="team-card-meta">17 игр • +10</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">30</div>
+                    <div class="team-card-stat-label">Очки</div>
+                </div>
+            </div>
+        </a>
+
+        <div style="text-align: center; margin-top: 16px;">
+            <button class="filter-btn" onclick="alert('Показать всю таблицу')">
+                Показать всю таблицу
+                <span class="material-symbols-rounded">expand_more</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tab Content: Matches -->
+    <div class="content tab-content" id="tab-matches">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600;">Ближайшие матчи</span>
+            <button class="filter-btn" onclick="openFilterModal()">
+                <span class="material-symbols-rounded">tune</span>
+                Все
+            </button>
         </div>
 
+        <a href="match-preview.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">Тур 19 • 26 декабря</span>
+                <span class="match-card-status upcoming">20:45</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-time">20:45</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/46.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Лестер</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="match-preview.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">Тур 19 • 26 декабря</span>
+                <span class="match-card-status upcoming">18:30</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/50.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Манчестер Сити</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-time">18:30</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/45.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Эвертон</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="match-post.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">Тур 18 • 22 декабря</span>
+                <span class="match-card-status finished">Завершен</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Тоттенхэм</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-score-num">2</span>
+                    <span style="color: var(--ws-text-tertiary)">:</span>
+                    <span class="match-card-score-num">1</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Tab Content: Scorers -->
+    <div class="content tab-content" id="tab-scorers">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600;">Лучшие бомбардиры</span>
+        </div>
+
+        <a href="player.html" class="player-card">
+            <span class="player-card-rank">1</span>
+            <div class="player-card-photo">
+                <img src="https://media.api-sports.io/football/players/306.png" alt="">
+            </div>
+            <div class="player-card-info">
+                <div class="player-card-name">Мохамед Салах</div>
+                <div class="player-card-team">
+                    <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    Ливерпуль
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div class="player-card-value">15</div>
+                <div style="font-size: 10px; color: var(--ws-text-tertiary);">голов</div>
+            </div>
+        </a>
+
+        <a href="player.html" class="player-card">
+            <span class="player-card-rank">2</span>
+            <div class="player-card-photo">
+                <img src="https://media.api-sports.io/football/players/1100.png" alt="">
+            </div>
+            <div class="player-card-info">
+                <div class="player-card-name">Эрлинг Холанд</div>
+                <div class="player-card-team">
+                    <img src="https://media.api-sports.io/football/teams/50.png" alt="">
+                    Манчестер Сити
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div class="player-card-value">13</div>
+                <div style="font-size: 10px; color: var(--ws-text-tertiary);">голов</div>
+            </div>
+        </a>
+
+        <a href="player.html" class="player-card">
+            <span class="player-card-rank">3</span>
+            <div class="player-card-photo">
+                <img src="https://media.api-sports.io/football/players/184.png" alt="">
+            </div>
+            <div class="player-card-info">
+                <div class="player-card-name">Коул Палмер</div>
+                <div class="player-card-team">
+                    <img src="https://media.api-sports.io/football/teams/49.png" alt="">
+                    Челси
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div class="player-card-value">11</div>
+                <div style="font-size: 10px; color: var(--ws-text-tertiary);">голов</div>
+            </div>
+        </a>
+
+        <a href="player.html" class="player-card">
+            <span class="player-card-rank">4</span>
+            <div class="player-card-photo">
+                <img src="https://media.api-sports.io/football/players/186.png" alt="">
+            </div>
+            <div class="player-card-info">
+                <div class="player-card-name">Букайо Сака</div>
+                <div class="player-card-team">
+                    <img src="https://media.api-sports.io/football/teams/42.png" alt="">
+                    Арсенал
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div class="player-card-value">9</div>
+                <div style="font-size: 10px; color: var(--ws-text-tertiary);">голов</div>
+            </div>
+        </a>
+
+        <a href="player.html" class="player-card">
+            <span class="player-card-rank">5</span>
+            <div class="player-card-photo">
+                <img src="https://media.api-sports.io/football/players/174.png" alt="">
+            </div>
+            <div class="player-card-info">
+                <div class="player-card-name">Александер Исак</div>
+                <div class="player-card-team">
+                    <img src="https://media.api-sports.io/football/teams/34.png" alt="">
+                    Ньюкасл
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div class="player-card-value">8</div>
+                <div style="font-size: 10px; color: var(--ws-text-tertiary);">голов</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Tab Content: Info -->
+    <div class="content tab-content" id="tab-info">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -355,17 +363,88 @@
                     <span class="stat-value">16 августа 2024</span>
                 </div>
                 <div class="stat-row">
+                    <span class="stat-label">Окончание</span>
+                    <span class="stat-value">25 мая 2025</span>
+                </div>
+                <div class="stat-row">
                     <span class="stat-label">Действующий чемпион</span>
-                    <span class="stat-value">Ман Сити</span>
+                    <span class="stat-value">Манчестер Сити</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">emoji_events</span>
+                    Зоны
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label" style="display:flex;align-items:center;gap:8px;">
+                        <span style="width:12px;height:12px;background:var(--ws-accent-green);border-radius:50%;"></span>
+                        1-4 места
+                    </span>
+                    <span class="stat-value">Лига чемпионов</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label" style="display:flex;align-items:center;gap:8px;">
+                        <span style="width:12px;height:12px;background:var(--ws-accent-yellow);border-radius:50%;"></span>
+                        5 место
+                    </span>
+                    <span class="stat-value">Лига Европы</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label" style="display:flex;align-items:center;gap:8px;">
+                        <span style="width:12px;height:12px;background:var(--ws-accent-red);border-radius:50%;"></span>
+                        18-20 места
+                    </span>
+                    <span class="stat-value">Вылет</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="win-ai.html" class="floating-win-btn">
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Фильтры</span>
+                <button class="modal-close" onclick="closeFilterModal()">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 style="margin-bottom:12px;font-size:14px;color:var(--ws-text-secondary)">Тур</h4>
+                <div class="filter-option selected" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Тур 19 (текущий)</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Тур 18</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Все туры</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WIN Button -->
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Кто станет чемпионом АПЛ?')">
         <span>WIN</span>
     </a>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
@@ -383,11 +462,45 @@
     </nav>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
+                // Remove active from all tabs
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Hide all content
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Activate clicked tab
                 this.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabId).classList.add('active');
             });
+        });
+
+        // Filter modal
+        function openFilterModal() {
+            document.getElementById('filterModal').classList.add('open');
+        }
+
+        function closeFilterModal() {
+            document.getElementById('filterModal').classList.remove('open');
+        }
+
+        function toggleFilter(el) {
+            // Single select - remove selected from others
+            el.parentElement.querySelectorAll('.filter-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            el.classList.add('selected');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('filterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFilterModal();
+            }
         });
     </script>
 </body>
