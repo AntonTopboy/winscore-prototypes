@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Тренер | WinScore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .coach-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 32px 16px 80px;
+            text-align: center;
+        }
+        .coach-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.2);
+            background: white;
+        }
+        .coach-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .coach-info-block {
+            background: var(--ws-bg-primary);
+            padding: 20px 16px;
+            margin: -60px 16px 16px;
+            border-radius: var(--ws-radius-lg);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+        .coach-name-big {
+            font-size: 22px;
+            font-weight: 800;
+        }
+        .coach-role {
+            font-size: 14px;
+            color: var(--ws-text-secondary);
+            margin-top: 4px;
+        }
+        .coach-team-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background: var(--ws-bg-secondary);
+            border-radius: var(--ws-radius-full);
+            text-decoration: none;
+            color: var(--ws-text-primary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .coach-team-link img {
+            width: 24px;
+            height: 24px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .stats-grid-item {
+            text-align: center;
+        }
+        .stats-grid-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .stats-grid-label {
+            font-size: 11px;
+            color: var(--ws-text-tertiary);
+            text-transform: uppercase;
+        }
+        .career-section {
+            padding: 16px;
+        }
+        .career-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ws-text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .career-club {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--ws-bg-secondary);
+            border-radius: var(--ws-radius-md);
+            margin-bottom: 10px;
+        }
+        .career-club-logo {
+            width: 44px;
+            height: 44px;
+        }
+        .career-club-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .career-club-info { flex: 1; }
+        .career-club-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .career-club-period {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .career-club-stats {
+            text-align: right;
+        }
+        .career-club-stat-row {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .trophy-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .trophy-item:last-child { border-bottom: none; }
+        .trophy-icon {
+            font-size: 28px;
+        }
+        .trophy-info { flex: 1; }
+        .trophy-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .trophy-team {
+            font-size: 12px;
+            color: var(--ws-text-secondary);
+        }
+        .trophy-count {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ws-accent-orange);
+        }
+        .tactics-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .tactics-item:last-child { border-bottom: none; }
+        .tactics-label { font-size: 13px; }
+        .tactics-value {
+            font-weight: 600;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>18:05</span>
+        <span>5G 📶 58%</span>
+    </div>
+
+    <div class="header" style="background: #1a1a2e; color: white;">
+        <a href="team.html" class="header-back" style="color: white;">
+            <span class="material-symbols-rounded">arrow_back</span>
+        </a>
+        <div class="header-title" style="color: white;">Тренер</div>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">share</span>
+        </div>
+    </div>
+
+    <div class="coach-hero">
+        <div class="coach-photo">
+            <img src="https://media.api-sports.io/football/coachs/1.png" alt="">
+        </div>
+    </div>
+
+    <div class="coach-info-block">
+        <div class="coach-name-big">Арне Слот</div>
+        <div class="coach-role">Главный тренер</div>
+        <a href="team.html" class="coach-team-link">
+            <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            <span>Ливерпуль</span>
+            <span class="material-symbols-rounded" style="font-size: 16px;">chevron_right</span>
+        </a>
+    </div>
+
+    <div class="tabs" style="margin-top: 0;">
+        <div class="tab active">Обзор</div>
+        <div class="tab">Карьера</div>
+        <div class="tab">Трофеи</div>
+        <div class="tab">Статистика</div>
+    </div>
+
+    <div class="content" style="padding-bottom: 120px;">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">person</span>
+                    Персональные данные
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Национальность</span>
+                    <span class="stat-value">🇳🇱 Нидерланды</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Возраст</span>
+                    <span class="stat-value">46 лет (17.09.1978)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Назначен</span>
+                    <span class="stat-value">1 июня 2024</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Контракт до</span>
+                    <span class="stat-value">2027</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">bar_chart</span>
+                    Текущий сезон
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stats-grid">
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value" style="color: var(--ws-accent-green);">76%</div>
+                        <div class="stats-grid-label">Побед</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">17</div>
+                        <div class="stats-grid-label">Матчей</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">44</div>
+                        <div class="stats-grid-label">Забито</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="career-section">
+            <div class="career-section-title">Тренерская карьера</div>
+            <a href="team.html" class="career-club" style="text-decoration: none; color: inherit;">
+                <div class="career-club-logo">
+                    <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                </div>
+                <div class="career-club-info">
+                    <div class="career-club-name">Ливерпуль</div>
+                    <div class="career-club-period">2024 — настоящее время</div>
+                </div>
+                <div class="career-club-stats">
+                    <div class="career-club-stat-row">17 матчей</div>
+                    <div class="career-club-stat-row">76% побед</div>
+                </div>
+            </a>
+            <div class="career-club">
+                <div class="career-club-logo">
+                    <img src="https://media.api-sports.io/football/teams/203.png" alt="">
+                </div>
+                <div class="career-club-info">
+                    <div class="career-club-name">Фейеноорд</div>
+                    <div class="career-club-period">2021 — 2024</div>
+                </div>
+                <div class="career-club-stats">
+                    <div class="career-club-stat-row">137 матчей</div>
+                    <div class="career-club-stat-row">64% побед</div>
+                </div>
+            </div>
+            <div class="career-club">
+                <div class="career-club-logo">
+                    <img src="https://media.api-sports.io/football/teams/194.png" alt="">
+                </div>
+                <div class="career-club-info">
+                    <div class="career-club-name">АЗ Алкмар</div>
+                    <div class="career-club-period">2019 — 2021</div>
+                </div>
+                <div class="career-club-stats">
+                    <div class="career-club-stat-row">66 матчей</div>
+                    <div class="career-club-stat-row">57% побед</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">emoji_events</span>
+                    Трофеи
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="trophy-item">
+                    <span class="trophy-icon">🏆</span>
+                    <div class="trophy-info">
+                        <div class="trophy-name">Чемпион Эредивизи</div>
+                        <div class="trophy-team">Фейеноорд • 2023</div>
+                    </div>
+                    <span class="trophy-count">1</span>
+                </div>
+                <div class="trophy-item">
+                    <span class="trophy-icon">🏆</span>
+                    <div class="trophy-info">
+                        <div class="trophy-name">Кубок Нидерландов</div>
+                        <div class="trophy-team">Фейеноорд • 2024</div>
+                    </div>
+                    <span class="trophy-count">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">sports_soccer</span>
+                    Тактический профиль
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="tactics-item">
+                    <span class="tactics-label">Предпочитаемая схема</span>
+                    <span class="tactics-value">4-3-3</span>
+                </div>
+                <div class="tactics-item">
+                    <span class="tactics-label">Стиль игры</span>
+                    <span class="tactics-value">Позиционное владение</span>
+                </div>
+                <div class="tactics-item">
+                    <span class="tactics-label">Прессинг</span>
+                    <span class="tactics-value">Высокий</span>
+                </div>
+                <div class="tactics-item">
+                    <span class="tactics-label">Темп атаки</span>
+                    <span class="tactics-value">Быстрый</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="win-ai.html" class="floating-win-btn">
+        <span>WIN</span>
+    </a>
+
+    <nav class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="bottom-nav-item active">WS</a>
+            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">favorite</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">search</span>
+            </a>
+        </div>
+        <div class="home-indicator">
+            <div class="home-indicator-bar"></div>
+        </div>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
