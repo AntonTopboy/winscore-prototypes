@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Команда | WinScore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .team-hero {
+            background: linear-gradient(135deg, #c8102e 0%, #8b0a1f 100%);
+            padding: 24px 16px;
+            color: white;
+            text-align: center;
+        }
+        .team-logo-big {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 12px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        .team-logo-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .team-name-big {
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .team-league {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+        .team-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 16px;
+        }
+        .team-stat-item {
+            text-align: center;
+        }
+        .team-stat-value {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .team-stat-label {
+            font-size: 11px;
+            opacity: 0.75;
+            text-transform: uppercase;
+        }
+        .action-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .action-icon-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .action-icon-btn .material-symbols-rounded {
+            color: white;
+            font-size: 22px;
+        }
+        .squad-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+        .squad-player {
+            text-align: center;
+            cursor: pointer;
+        }
+        .squad-player-photo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin: 0 auto 6px;
+            overflow: hidden;
+            background: var(--ws-bg-primary);
+        }
+        .squad-player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .squad-player-name {
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        .squad-player-position {
+            font-size: 10px;
+            color: var(--ws-text-tertiary);
+        }
+        .next-match-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 16px;
+            border-radius: var(--ws-radius-lg);
+            padding: 16px;
+            color: white;
+        }
+        .next-match-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+        .next-match-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .next-match-team {
+            text-align: center;
+            flex: 1;
+        }
+        .next-match-logo {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 6px;
+            background: white;
+            border-radius: 50%;
+            padding: 6px;
+        }
+        .next-match-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .next-match-name {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .next-match-vs {
+            text-align: center;
+            padding: 0 12px;
+        }
+        .next-match-time {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .next-match-date {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>18:05</span>
+        <span>5G 📶 58%</span>
+    </div>
+
+    <div class="header" style="background: #c8102e; color: white;">
+        <a href="index.html" class="header-back" style="color: white;">
+            <span class="material-symbols-rounded">arrow_back</span>
+        </a>
+        <div class="header-title" style="color: white;">Команда</div>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">search</span>
+        </div>
+    </div>
+
+    <div class="team-hero">
+        <div class="team-logo-big">
+            <img src="https://media.api-sports.io/football/teams/40.png" alt="Liverpool">
+        </div>
+        <div class="team-name-big">Ливерпуль</div>
+        <div class="team-league">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Англия • Премьер-лига</div>
+        <div class="team-stats-row">
+            <div class="team-stat-item">
+                <div class="team-stat-value">1</div>
+                <div class="team-stat-label">Позиция</div>
+            </div>
+            <div class="team-stat-item">
+                <div class="team-stat-value">42</div>
+                <div class="team-stat-label">Очки</div>
+            </div>
+            <div class="team-stat-item">
+                <div class="team-stat-value">44:17</div>
+                <div class="team-stat-label">Голы</div>
+            </div>
+        </div>
+        <div class="action-row">
+            <div class="action-icon-btn">
+                <span class="material-symbols-rounded">favorite_border</span>
+            </div>
+            <div class="action-icon-btn">
+                <span class="material-symbols-rounded">notifications_none</span>
+            </div>
+            <div class="action-icon-btn">
+                <span class="material-symbols-rounded">share</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active">Обзор</div>
+        <div class="tab">Состав</div>
+        <div class="tab">Матчи</div>
+        <div class="tab">Статистика</div>
+        <div class="tab">Трансферы</div>
+    </div>
+
+    <div class="content" style="padding-bottom: 120px;">
+        <a href="match-preview.html" class="next-match-card" style="text-decoration: none; display: block;">
+            <div class="next-match-label">Следующий матч • Премьер-лига</div>
+            <div class="next-match-content">
+                <div class="next-match-team">
+                    <div class="next-match-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <div class="next-match-name">Ливерпуль</div>
+                </div>
+                <div class="next-match-vs">
+                    <div class="next-match-time">20:45</div>
+                    <div class="next-match-date">26 декабря</div>
+                </div>
+                <div class="next-match-team">
+                    <div class="next-match-logo">
+                        <img src="https://media.api-sports.io/football/teams/46.png" alt="">
+                    </div>
+                    <div class="next-match-name">Лестер</div>
+                </div>
+            </div>
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">trending_up</span>
+                    Форма
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                    <div style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                    <div style="width: 32px; height: 32px; background: #9CA3AF; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">Н</div>
+                    <div style="width: 32px; height: 32px; background: var(--ws-accent-green); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">В</div>
+                </div>
+                <div style="font-size: 12px; color: var(--ws-text-secondary);">Последние 5 матчей: 4В 1Н 0П</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">person</span>
+                    Главный тренер
+                </div>
+            </div>
+            <a href="coach.html" class="list-item" style="text-decoration: none; color: inherit;">
+                <div class="list-item-avatar">
+                    <img src="https://media.api-sports.io/football/coachs/1.png" alt="">
+                </div>
+                <div class="list-item-info">
+                    <div class="list-item-name">Арне Слот</div>
+                    <div class="list-item-meta">🇳🇱 Нидерланды • С 2024</div>
+                </div>
+                <span class="material-symbols-rounded list-item-action">chevron_right</span>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">star</span>
+                    Ключевые игроки
+                </div>
+                <a href="#" style="font-size: 13px; color: var(--ws-accent-orange); text-decoration: none;">Все</a>
+            </div>
+            <div class="squad-grid">
+                <a href="player.html" class="squad-player" style="text-decoration: none; color: inherit;">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/306.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Салах</div>
+                    <div class="squad-player-position">ПП</div>
+                </a>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/303.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Ван Дейк</div>
+                    <div class="squad-player-position">ЦЗ</div>
+                </div>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/1112.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Арнольд</div>
+                    <div class="squad-player-position">ПЗ</div>
+                </div>
+                <div class="squad-player">
+                    <div class="squad-player-photo">
+                        <img src="https://media.api-sports.io/football/players/1100.png" alt="">
+                    </div>
+                    <div class="squad-player-name">Диаз</div>
+                    <div class="squad-player-position">ЛП</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">stadium</span>
+                    Домашняя арена
+                </div>
+            </div>
+            <a href="stadium.html" class="list-item" style="text-decoration: none; color: inherit;">
+                <div class="list-item-avatar" style="border-radius: 8px;">
+                    <img src="https://media.api-sports.io/football/venues/550.png" alt="" style="object-fit: cover;">
+                </div>
+                <div class="list-item-info">
+                    <div class="list-item-name">Anfield</div>
+                    <div class="list-item-meta">Ливерпуль • 53,394 мест</div>
+                </div>
+                <span class="material-symbols-rounded list-item-action">chevron_right</span>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">info</span>
+                    О клубе
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Основан</span>
+                    <span class="stat-value">1892</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Город</span>
+                    <span class="stat-value">Ливерпуль</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Стоимость состава</span>
+                    <span class="stat-value">€782M</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Титулы ЛЧ</span>
+                    <span class="stat-value">6 🏆</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Титулы АПЛ</span>
+                    <span class="stat-value">19 🏆</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="win-ai.html" class="floating-win-btn">
+        <span>WIN</span>
+    </a>
+
+    <nav class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="bottom-nav-item active">WS</a>
+            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">favorite</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">search</span>
+            </a>
+        </div>
+        <div class="home-indicator">
+            <div class="home-indicator-bar"></div>
+        </div>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
