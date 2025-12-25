@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Превью матча | WinScore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .match-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px 16px 24px;
+            color: white;
+        }
+        .match-league-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        .match-teams-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .match-team-block {
+            flex: 1;
+            text-align: center;
+        }
+        .match-team-logo {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: white;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .match-team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .match-team-name-hero {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .match-vs-block {
+            padding: 0 16px;
+            text-align: center;
+        }
+        .match-time-big {
+            font-size: 32px;
+            font-weight: 800;
+        }
+        .match-date-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .prediction-card {
+            background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%);
+            margin: 16px;
+            border-radius: var(--ws-radius-lg);
+            padding: 16px;
+            color: white;
+        }
+        .prediction-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .prediction-title {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .prediction-odds {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .prediction-odd {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--ws-radius-md);
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .prediction-odd:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .prediction-odd-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        .prediction-odd-value {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .h2h-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--ws-border);
+        }
+        .h2h-row:last-child { border-bottom: none; }
+        .h2h-date {
+            font-size: 12px;
+            color: var(--ws-text-tertiary);
+            width: 50px;
+        }
+        .h2h-teams {
+            flex: 1;
+            font-size: 13px;
+            padding: 0 8px;
+        }
+        .h2h-score {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ws-text-primary);
+        }
+        .form-badges {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .form-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+        }
+        .form-badge.w { background: var(--ws-accent-green); }
+        .form-badge.d { background: #9CA3AF; }
+        .form-badge.l { background: var(--ws-accent-red); }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>18:05</span>
+        <span>5G 📶 58%</span>
+    </div>
+
+    <div class="header">
+        <a href="index.html" class="header-back">
+            <span class="material-symbols-rounded">arrow_back</span>
+        </a>
+        <div class="header-subtitle">Премьер-лига, Тур 19</div>
+        <div class="header-actions">
+            <span class="material-symbols-rounded">favorite_border</span>
+            <span class="material-symbols-rounded">notifications_none</span>
+        </div>
+    </div>
+
+    <div class="match-hero">
+        <div class="match-league-row">
+            <img src="https://media.api-sports.io/football/leagues/39.png" width="20" height="20">
+            <span>Англия • Премьер-лига</span>
+        </div>
+        <div class="match-teams-row">
+            <a href="team.html" class="match-team-block" style="text-decoration:none;color:inherit;">
+                <div class="match-team-logo">
+                    <img src="https://media.api-sports.io/football/teams/47.png" alt="Тоттенхэм">
+                </div>
+                <div class="match-team-name-hero">Тоттенхэм</div>
+            </a>
+            <div class="match-vs-block">
+                <div class="match-time-big">20:45</div>
+                <div class="match-date-info">25 декабря</div>
+            </div>
+            <div class="match-team-block">
+                <div class="match-team-logo">
+                    <img src="https://media.api-sports.io/football/teams/33.png" alt="Манчестер Юнайтед">
+                </div>
+                <div class="match-team-name-hero">Ман Юнайтед</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active">Превью</div>
+        <div class="tab">Составы</div>
+        <div class="tab">H2H</div>
+        <div class="tab">Таблица</div>
+        <div class="tab">Стадион</div>
+    </div>
+
+    <div class="content" style="padding-bottom: 120px;">
+        <div class="prediction-card">
+            <div class="prediction-header">
+                <span style="font-size: 20px;">🤖</span>
+                <span class="prediction-title">WIN AI прогноз</span>
+            </div>
+            <div class="prediction-odds">
+                <div class="prediction-odd">
+                    <div class="prediction-odd-label">П1</div>
+                    <div class="prediction-odd-value">2.15</div>
+                </div>
+                <div class="prediction-odd">
+                    <div class="prediction-odd-label">X</div>
+                    <div class="prediction-odd-value">3.40</div>
+                </div>
+                <div class="prediction-odd">
+                    <div class="prediction-odd-label">П2</div>
+                    <div class="prediction-odd-value">3.10</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">info</span>
+                    Ключевая информация
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-row">
+                    <span class="stat-label">Стадион</span>
+                    <a href="stadium.html" class="stat-value" style="color: var(--ws-accent-orange); text-decoration: none;">Tottenham Hotspur Stadium</a>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Судья</span>
+                    <a href="referee.html" class="stat-value" style="color: var(--ws-accent-orange); text-decoration: none;">Майкл Оливер</a>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Тренер (Тоттенхэм)</span>
+                    <a href="coach.html" class="stat-value" style="color: var(--ws-accent-orange); text-decoration: none;">Анже Постекоглу</a>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Тренер (МЮ)</span>
+                    <span class="stat-value" style="color: var(--ws-accent-orange);">Рубен Аморим</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">trending_up</span>
+                    Форма команд
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Тоттенхэм</div>
+                    <div style="font-size: 12px; color: var(--ws-text-secondary);">Последние 5 матчей</div>
+                    <div class="form-badges">
+                        <div class="form-badge w">В</div>
+                        <div class="form-badge w">В</div>
+                        <div class="form-badge d">Н</div>
+                        <div class="form-badge l">П</div>
+                        <div class="form-badge w">В</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Манчестер Юнайтед</div>
+                    <div style="font-size: 12px; color: var(--ws-text-secondary);">Последние 5 матчей</div>
+                    <div class="form-badges">
+                        <div class="form-badge l">П</div>
+                        <div class="form-badge d">Н</div>
+                        <div class="form-badge w">В</div>
+                        <div class="form-badge l">П</div>
+                        <div class="form-badge d">Н</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">compare_arrows</span>
+                    Личные встречи
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="h2h-row">
+                    <span class="h2h-date">14.01.24</span>
+                    <span class="h2h-teams">Тоттенхэм - МЮ</span>
+                    <span class="h2h-score">2 : 2</span>
+                </div>
+                <div class="h2h-row">
+                    <span class="h2h-date">19.08.23</span>
+                    <span class="h2h-teams">МЮ - Тоттенхэм</span>
+                    <span class="h2h-score">2 : 0</span>
+                </div>
+                <div class="h2h-row">
+                    <span class="h2h-date">27.04.23</span>
+                    <span class="h2h-teams">Тоттенхэм - МЮ</span>
+                    <span class="h2h-score">2 : 2</span>
+                </div>
+                <div class="h2h-row">
+                    <span class="h2h-date">19.10.22</span>
+                    <span class="h2h-teams">МЮ - Тоттенхэм</span>
+                    <span class="h2h-score">2 : 0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">healing</span>
+                    Травмы и дисквалификации
+                </div>
+            </div>
+            <div class="card-body">
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Тоттенхэм</div>
+                <a href="player.html" class="list-item" style="text-decoration: none; color: inherit;">
+                    <div class="list-item-avatar">
+                        <img src="https://media.api-sports.io/football/players/186.png" alt="">
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">Ришарлисон</div>
+                        <div class="list-item-meta">Травма колена • До января</div>
+                    </div>
+                    <span class="material-symbols-rounded" style="color: var(--ws-accent-red);">personal_injury</span>
+                </a>
+                <div style="font-size: 14px; font-weight: 600; margin: 16px 0 12px;">Манчестер Юнайтед</div>
+                <div class="list-item">
+                    <div class="list-item-avatar">
+                        <img src="https://media.api-sports.io/football/players/909.png" alt="">
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">Лисандро Мартинес</div>
+                        <div class="list-item-meta">Травма бедра • Сомнительно</div>
+                    </div>
+                    <span class="material-symbols-rounded" style="color: var(--ws-accent-yellow);">help</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="win-ai.html" class="floating-win-btn">
+        <span>WIN</span>
+    </a>
+
+    <nav class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="bottom-nav-item active">WS</a>
+            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">favorite</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">search</span>
+            </a>
+        </div>
+        <div class="home-indicator">
+            <div class="home-indicator-bar"></div>
+        </div>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

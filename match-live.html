@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LIVE матч | WinScore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .match-hero-live {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            padding: 16px;
+            color: white;
+        }
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: var(--ws-radius-full);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .live-badge .live-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        .match-score-live {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 16px 0;
+        }
+        .team-score-block {
+            text-align: center;
+            flex: 1;
+        }
+        .team-logo-live {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 8px;
+            border-radius: 50%;
+            background: white;
+            padding: 6px;
+        }
+        .team-logo-live img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .team-name-live {
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+        .score-center {
+            text-align: center;
+        }
+        .score-big {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .score-minute {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        .scorers-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 11px;
+            opacity: 0.85;
+        }
+        .scorer {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+        .stat-bar-label {
+            font-size: 13px;
+            color: var(--ws-text-secondary);
+            text-align: center;
+            flex: 1;
+        }
+        .stat-bar-value {
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 35px;
+        }
+        .stat-bar-container {
+            flex: 2;
+            display: flex;
+            gap: 2px;
+            height: 6px;
+        }
+        .stat-bar-home {
+            background: var(--ws-accent-orange);
+            border-radius: 3px 0 0 3px;
+            transition: width 0.5s;
+        }
+        .stat-bar-away {
+            background: #3B82F6;
+            border-radius: 0 3px 3px 0;
+            transition: width 0.5s;
+        }
+        .momentum-chart {
+            height: 60px;
+            background: var(--ws-bg-primary);
+            border-radius: var(--ws-radius-md);
+            position: relative;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+        .momentum-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: var(--ws-border);
+        }
+        .momentum-area {
+            position: absolute;
+            bottom: 50%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(234, 88, 12, 0.3) 0%, rgba(234, 88, 12, 0) 100%);
+            clip-path: polygon(0% 100%, 5% 80%, 15% 60%, 25% 40%, 35% 70%, 45% 20%, 55% 50%, 65% 30%, 75% 60%, 85% 40%, 95% 70%, 100% 50%, 100% 100%);
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <span>18:05</span>
+        <span>5G 📶 58%</span>
+    </div>
+
+    <div class="header" style="background: #dc2626; color: white;">
+        <a href="index.html" class="header-back" style="color: white;">
+            <span class="material-symbols-rounded">arrow_back</span>
+        </a>
+        <div class="header-subtitle" style="color: rgba(255,255,255,0.9);">Премьер-лига, Тур 19</div>
+        <div class="header-actions" style="color: white;">
+            <span class="material-symbols-rounded">favorite_border</span>
+            <span class="material-symbols-rounded">notifications</span>
+        </div>
+    </div>
+
+    <div class="match-hero-live">
+        <div class="live-badge">
+            <div class="live-dot"></div>
+            LIVE
+        </div>
+        <div class="match-score-live">
+            <a href="team.html" class="team-score-block" style="text-decoration:none;color:inherit;">
+                <div class="team-logo-live">
+                    <img src="https://media.api-sports.io/football/teams/50.png" alt="Манчестер Сити">
+                </div>
+                <div class="team-name-live">Ман Сити</div>
+            </a>
+            <div class="score-center">
+                <div class="score-big">2 : 1</div>
+                <div class="score-minute">67'</div>
+            </div>
+            <div class="team-score-block">
+                <div class="team-logo-live">
+                    <img src="https://media.api-sports.io/football/teams/42.png" alt="Арсенал">
+                </div>
+                <div class="team-name-live">Арсенал</div>
+            </div>
+        </div>
+        <div class="scorers-row">
+            <div>
+                <div class="scorer">⚽ Холанд 23', 54'</div>
+            </div>
+            <div style="text-align: right;">
+                <div class="scorer">⚽ Сака 41'</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active">Трансляция</div>
+        <div class="tab">Статистика</div>
+        <div class="tab">Составы</div>
+        <div class="tab">Таблица</div>
+    </div>
+
+    <div class="content" style="padding-bottom: 120px;">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">show_chart</span>
+                    Моментум
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="momentum-chart">
+                    <div class="momentum-line"></div>
+                    <div class="momentum-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">analytics</span>
+                    Статистика матча
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stat-bar-row">
+                    <span class="stat-bar-value">58%</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar-home" style="width: 58%;"></div>
+                        <div class="stat-bar-away" style="width: 42%;"></div>
+                    </div>
+                    <span class="stat-bar-value" style="text-align: right;">42%</span>
+                </div>
+                <div class="stat-bar-label">Владение мячом</div>
+
+                <div class="stat-bar-row">
+                    <span class="stat-bar-value">14</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar-home" style="width: 63%;"></div>
+                        <div class="stat-bar-away" style="width: 37%;"></div>
+                    </div>
+                    <span class="stat-bar-value" style="text-align: right;">8</span>
+                </div>
+                <div class="stat-bar-label">Удары</div>
+
+                <div class="stat-bar-row">
+                    <span class="stat-bar-value">5</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar-home" style="width: 55%;"></div>
+                        <div class="stat-bar-away" style="width: 45%;"></div>
+                    </div>
+                    <span class="stat-bar-value" style="text-align: right;">4</span>
+                </div>
+                <div class="stat-bar-label">Удары в створ</div>
+
+                <div class="stat-bar-row">
+                    <span class="stat-bar-value">6</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar-home" style="width: 60%;"></div>
+                        <div class="stat-bar-away" style="width: 40%;"></div>
+                    </div>
+                    <span class="stat-bar-value" style="text-align: right;">4</span>
+                </div>
+                <div class="stat-bar-label">Угловые</div>
+
+                <div class="stat-bar-row">
+                    <span class="stat-bar-value">2</span>
+                    <div class="stat-bar-container">
+                        <div class="stat-bar-home" style="width: 40%;"></div>
+                        <div class="stat-bar-away" style="width: 60%;"></div>
+                    </div>
+                    <span class="stat-bar-value" style="text-align: right;">3</span>
+                </div>
+                <div class="stat-bar-label">Фолы</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">schedule</span>
+                    Хронология
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon goal">⚽</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">54'</div>
+                        <a href="player.html" class="timeline-text" style="text-decoration: none; color: inherit;">Эрлинг Холанд</a>
+                        <div class="timeline-meta">Гол! Ман Сити 2:1 • Ассист: Де Брёйне</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon yellow">🟨</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">48'</div>
+                        <div class="timeline-text">Деклан Райс</div>
+                        <div class="timeline-meta">Жёлтая карточка • Арсенал</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon sub">🔄</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">46'</div>
+                        <div class="timeline-text">Замена</div>
+                        <div class="timeline-meta">Вход: Жезус • Выход: Мартинелли</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon goal">⚽</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">41'</div>
+                        <div class="timeline-text">Букайо Сака</div>
+                        <div class="timeline-meta">Гол! Арсенал 1:1 • Ассист: Эдегор</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon goal">⚽</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">23'</div>
+                        <div class="timeline-text">Эрлинг Холанд</div>
+                        <div class="timeline-meta">Гол! Ман Сити 1:0 • Пенальти</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="background: var(--ws-bg-primary);">📍</div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">1'</div>
+                        <div class="timeline-text">Начало матча</div>
+                        <div class="timeline-meta">Свисток дан, игра началась</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white;">
+            <div class="card-body">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 24px;">🤖</span>
+                    <span style="font-weight: 700;">WIN AI</span>
+                </div>
+                <p style="font-size: 14px; line-height: 1.5; opacity: 0.9;">
+                    Манчестер Сити контролирует игру и создаёт больше моментов. 
+                    Вероятность итогового счёта 3:1 составляет 28%.
+                </p>
+                <button class="action-btn primary" style="width: 100%; margin-top: 12px;">
+                    Задать вопрос WIN AI
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <a href="win-ai.html" class="floating-win-btn">
+        <span>WIN</span>
+    </a>
+
+    <nav class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="bottom-nav-item active">WS</a>
+            <a href="#" class="bottom-nav-item">Live</a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">favorite</span>
+            </a>
+            <a href="#" class="bottom-nav-item">
+                <span class="material-symbols-rounded">search</span>
+            </a>
+        </div>
+        <div class="home-indicator">
+            <div class="home-indicator-bar"></div>
+        </div>
+    </nav>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
