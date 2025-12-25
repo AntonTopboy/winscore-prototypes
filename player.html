@@ -37,9 +37,9 @@
             line-height: 1;
         }
         .player-info-block {
-            background: var(--ws-bg-primary);
+            background: var(--ws-bg-secondary);
             padding: 16px;
-            margin: -24px 16px 16px;
+            margin: -24px 16px 0;
             border-radius: var(--ws-radius-lg);
             position: relative;
             z-index: 10;
@@ -91,142 +91,6 @@
             color: var(--ws-text-tertiary);
             text-transform: uppercase;
         }
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-        }
-        .action-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: var(--ws-radius-md);
-            border: 1px solid var(--ws-border);
-            background: var(--ws-bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 12px;
-            color: var(--ws-text-primary);
-            cursor: pointer;
-        }
-        .action-btn .material-symbols-rounded {
-            font-size: 18px;
-        }
-        .win-ai-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: var(--ws-radius-lg);
-            padding: 16px;
-            margin: 16px;
-            color: white;
-        }
-        .win-ai-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .win-ai-logo {
-            width: 32px;
-            height: 32px;
-            background: var(--ws-accent-orange);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 12px;
-        }
-        .win-ai-title {
-            font-weight: 700;
-            font-size: 15px;
-        }
-        .win-ai-question {
-            background: rgba(255,255,255,0.08);
-            padding: 12px 14px;
-            border-radius: var(--ws-radius-md);
-            font-size: 13px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .win-ai-question:hover {
-            background: rgba(255,255,255,0.12);
-        }
-        .chart-placeholder {
-            height: 160px;
-            background: var(--ws-bg-secondary);
-            border-radius: var(--ws-radius-md);
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            padding: 16px;
-            gap: 8px;
-        }
-        .chart-bar {
-            width: 24px;
-            background: var(--ws-accent-orange);
-            border-radius: 4px 4px 0 0;
-        }
-        .attribute-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .attribute-row:last-child { border-bottom: none; }
-        .attribute-name {
-            width: 100px;
-            font-size: 13px;
-            color: var(--ws-text-secondary);
-        }
-        .attribute-bar-bg {
-            flex: 1;
-            height: 8px;
-            background: var(--ws-bg-secondary);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .attribute-bar {
-            height: 100%;
-            background: var(--ws-accent-orange);
-            border-radius: 4px;
-        }
-        .attribute-value {
-            width: 40px;
-            text-align: right;
-            font-weight: 600;
-            font-size: 13px;
-        }
-        .career-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--ws-border);
-        }
-        .career-item:last-child { border-bottom: none; }
-        .career-team-logo {
-            width: 40px;
-            height: 40px;
-        }
-        .career-team-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .career-info { flex: 1; }
-        .career-team-name { font-weight: 600; }
-        .career-period {
-            font-size: 12px;
-            color: var(--ws-text-secondary);
-        }
-        .career-stats {
-            text-align: right;
-            font-size: 12px;
-            color: var(--ws-text-secondary);
-        }
     </style>
 </head>
 <body>
@@ -235,16 +99,23 @@
         <span>5G 📶 58%</span>
     </div>
 
-    <div class="header" style="background: #c8102e; color: white;">
+    <!-- Header -->
+    <div class="header" style="background: linear-gradient(135deg, #c8102e 0%, #8b0a1f 100%); border: none;">
         <a href="team.html" class="header-back" style="color: white;">
             <span class="material-symbols-rounded">arrow_back</span>
         </a>
         <div class="header-title" style="color: white;">Игрок</div>
-        <div class="header-actions" style="color: white;">
-            <span class="material-symbols-rounded">search</span>
+        <div class="header-actions">
+            <button class="header-action" style="color: white;" onclick="toggleFavorite(this)">
+                <span class="material-symbols-rounded">favorite_border</span>
+            </button>
+            <button class="header-action" style="color: white;">
+                <span class="material-symbols-rounded">share</span>
+            </button>
         </div>
     </div>
 
+    <!-- Hero -->
     <div class="player-hero">
         <div class="player-photo">
             <img src="https://media.api-sports.io/football/players/306.png" alt="Mohamed Salah">
@@ -252,6 +123,7 @@
         <div class="player-number">11</div>
     </div>
 
+    <!-- Player Info Block -->
     <div class="player-info-block">
         <div class="player-name-big">Мохамед Салах</div>
         <a href="team.html" class="player-team-link">
@@ -279,64 +151,19 @@
                 <div class="key-stat-label">Матчи</div>
             </div>
         </div>
-
-        <div class="action-buttons">
-            <button class="action-btn">
-                <span class="material-symbols-rounded">favorite_border</span>
-                <span>В избранное</span>
-            </button>
-            <button class="action-btn">
-                <span class="material-symbols-rounded">compare_arrows</span>
-                <span>Сравнить</span>
-            </button>
-        </div>
     </div>
 
-    <div class="tabs" style="margin-top: 0;">
-        <div class="tab active">Обзор</div>
-        <div class="tab">Сезон</div>
-        <div class="tab">Матчи</div>
-        <div class="tab">Статистика</div>
+    <!-- Tabs - макс 4 по аудиту -->
+    <div class="tabs" style="margin-top: 16px;">
+        <div class="tab active" data-tab="overview">Обзор</div>
+        <div class="tab" data-tab="stats">Статистика</div>
+        <div class="tab" data-tab="matches">Матчи</div>
+        <div class="tab" data-tab="career">Карьера</div>
     </div>
 
-    <div class="content" style="padding-bottom: 120px;">
-        <div class="win-ai-card">
-            <div class="win-ai-header">
-                <div class="win-ai-logo">WIN</div>
-                <div class="win-ai-title">WIN AI</div>
-            </div>
-            <div class="win-ai-question">📈 Забьёт ли Салах в следующем матче?</div>
-            <div class="win-ai-question">⚽ Сколько голов забьёт до конца сезона?</div>
-            <div class="win-ai-question">🏆 Получит ли Золотую бутсу?</div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">timeline</span>
-                    Рейтинг WS по месяцам
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="chart-placeholder">
-                    <div class="chart-bar" style="height: 70%;"></div>
-                    <div class="chart-bar" style="height: 85%;"></div>
-                    <div class="chart-bar" style="height: 75%;"></div>
-                    <div class="chart-bar" style="height: 90%;"></div>
-                    <div class="chart-bar" style="height: 95%;"></div>
-                    <div class="chart-bar" style="height: 80%;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--ws-text-tertiary); margin-top: 8px;">
-                    <span>Июл</span>
-                    <span>Авг</span>
-                    <span>Сен</span>
-                    <span>Окт</span>
-                    <span>Ноя</span>
-                    <span>Дек</span>
-                </div>
-            </div>
-        </div>
-
+    <!-- Tab: Overview -->
+    <div class="content tab-content active" id="tab-overview">
+        <!-- Персональные данные - первый блок по аудиту (важная информация сверху) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -354,12 +181,8 @@
                     <span class="stat-value">32 года (15.06.1992)</span>
                 </div>
                 <div class="stat-row">
-                    <span class="stat-label">Рост</span>
-                    <span class="stat-value">175 см</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Вес</span>
-                    <span class="stat-value">71 кг</span>
+                    <span class="stat-label">Рост / Вес</span>
+                    <span class="stat-value">175 см / 71 кг</span>
                 </div>
                 <div class="stat-row">
                     <span class="stat-label">Рабочая нога</span>
@@ -372,166 +195,372 @@
             </div>
         </div>
 
+        <!-- Атрибуты - BAR CHARTS по аудиту -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span class="material-symbols-rounded">radar</span>
+                    <span class="material-symbols-rounded">leaderboard</span>
                     Атрибуты
                 </div>
             </div>
             <div class="card-body">
-                <div class="attribute-row">
-                    <span class="attribute-name">Нападение</span>
-                    <div class="attribute-bar-bg">
-                        <div class="attribute-bar" style="width: 92%;"></div>
+                <div class="bar-chart">
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Нападение</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 92%;"></div>
+                        </div>
+                        <span class="bar-chart-value">92</span>
                     </div>
-                    <span class="attribute-value">92</span>
-                </div>
-                <div class="attribute-row">
-                    <span class="attribute-name">Техника</span>
-                    <div class="attribute-bar-bg">
-                        <div class="attribute-bar" style="width: 89%;"></div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Техника</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 89%;"></div>
+                        </div>
+                        <span class="bar-chart-value">89</span>
                     </div>
-                    <span class="attribute-value">89</span>
-                </div>
-                <div class="attribute-row">
-                    <span class="attribute-name">Тактика</span>
-                    <div class="attribute-bar-bg">
-                        <div class="attribute-bar" style="width: 85%;"></div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Тактика</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 85%;"></div>
+                        </div>
+                        <span class="bar-chart-value">85</span>
                     </div>
-                    <span class="attribute-value">85</span>
-                </div>
-                <div class="attribute-row">
-                    <span class="attribute-name">Защита</span>
-                    <div class="attribute-bar-bg">
-                        <div class="attribute-bar" style="width: 42%;"></div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Футб. IQ</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 88%;"></div>
+                        </div>
+                        <span class="bar-chart-value">88</span>
                     </div>
-                    <span class="attribute-value">42</span>
-                </div>
-                <div class="attribute-row">
-                    <span class="attribute-name">Футбольный IQ</span>
-                    <div class="attribute-bar-bg">
-                        <div class="attribute-bar" style="width: 88%;"></div>
-                    </div>
-                    <span class="attribute-value">88</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">bar_chart</span>
-                    Статистика сезона
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="stat-row">
-                    <span class="stat-label">Матчи</span>
-                    <span class="stat-value">17</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Голы</span>
-                    <span class="stat-value">15</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Голевые передачи</span>
-                    <span class="stat-value">11</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">xG</span>
-                    <span class="stat-value">12.4</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">xA</span>
-                    <span class="stat-value">8.7</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Минуты</span>
-                    <span class="stat-value">1,487</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="material-symbols-rounded">history</span>
-                    Карьера
-                </div>
-            </div>
-            <div class="card-body" style="padding: 8px 16px;">
-                <a href="team.html" class="career-item" style="text-decoration: none; color: inherit;">
-                    <div class="career-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
-                    </div>
-                    <div class="career-info">
-                        <div class="career-team-name">Ливерпуль</div>
-                        <div class="career-period">2017 — настоящее время</div>
-                    </div>
-                    <div class="career-stats">
-                        226 матчей<br>157 голов
-                    </div>
-                </a>
-                <div class="career-item">
-                    <div class="career-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/497.png" alt="">
-                    </div>
-                    <div class="career-info">
-                        <div class="career-team-name">Рома</div>
-                        <div class="career-period">2015 — 2017</div>
-                    </div>
-                    <div class="career-stats">
-                        83 матча<br>34 гола
-                    </div>
-                </div>
-                <div class="career-item">
-                    <div class="career-team-logo">
-                        <img src="https://media.api-sports.io/football/teams/49.png" alt="">
-                    </div>
-                    <div class="career-info">
-                        <div class="career-team-name">Челси</div>
-                        <div class="career-period">2014 — 2015</div>
-                    </div>
-                    <div class="career-stats">
-                        19 матчей<br>2 гола
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Защита</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill red" style="width: 42%;"></div>
+                        </div>
+                        <span class="bar-chart-value">42</span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Текущий клуб -->
+        <a href="team.html" class="list-item" style="background: var(--ws-bg-secondary); border-radius: var(--ws-radius-lg); margin-bottom: 16px; border: none;">
+            <div class="list-item-avatar" style="border-radius: 8px;">
+                <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            </div>
+            <div class="list-item-info">
+                <div class="list-item-name">Ливерпуль</div>
+                <div class="list-item-meta">Контракт до 30.06.2025</div>
+            </div>
+            <span class="material-symbols-rounded list-item-action">chevron_right</span>
+        </a>
+
+        <!-- Сборная -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
                     <span class="material-symbols-rounded">flag</span>
-                    Сборная
+                    Сборная Египта
                 </div>
             </div>
             <div class="card-body">
-                <div class="stat-row">
-                    <span class="stat-label">Страна</span>
-                    <span class="stat-value">🇪🇬 Египет</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Дебют</span>
-                    <span class="stat-value">03.09.2011</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Матчи</span>
-                    <span class="stat-value">99</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Голы</span>
-                    <span class="stat-value">57</span>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">99</div>
+                        <div class="stats-grid-label">Матчей</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value orange">57</div>
+                        <div class="stats-grid-label">Голов</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">12</div>
+                        <div class="stats-grid-label">Передач</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="win-ai.html" class="floating-win-btn">
+    <!-- Tab: Stats -->
+    <div class="content tab-content" id="tab-stats">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600;">Сезон 2024/25</span>
+            <button class="filter-btn" onclick="openFilterModal()">
+                <span class="material-symbols-rounded">tune</span>
+                Все турниры
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">sports_soccer</span>
+                    Основные показатели
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">17</div>
+                        <div class="stats-grid-label">Матчей</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value">1,487</div>
+                        <div class="stats-grid-label">Минут</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value orange">15</div>
+                        <div class="stats-grid-label">Голов</div>
+                    </div>
+                    <div class="stats-grid-item">
+                        <div class="stats-grid-value green">11</div>
+                        <div class="stats-grid-label">Ассистов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="material-symbols-rounded">trending_up</span>
+                    Продвинутая статистика
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="bar-chart">
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">xG</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 82%;"></div>
+                        </div>
+                        <span class="bar-chart-value">12.4</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">xA</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 72%;"></div>
+                        </div>
+                        <span class="bar-chart-value">8.7</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Удары/матч</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill" style="width: 65%;"></div>
+                        </div>
+                        <span class="bar-chart-value">3.2</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Ключ. пасы</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill blue" style="width: 58%;"></div>
+                        </div>
+                        <span class="bar-chart-value">2.1</span>
+                    </div>
+                    <div class="bar-chart-item">
+                        <span class="bar-chart-label">Дриблинг %</span>
+                        <div class="bar-chart-track">
+                            <div class="bar-chart-fill green" style="width: 54%;"></div>
+                        </div>
+                        <span class="bar-chart-value">54%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab: Matches -->
+    <div class="content tab-content" id="tab-matches">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; font-weight: 600;">Последние матчи</span>
+        </div>
+
+        <a href="match-post.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">АПЛ • 22 декабря</span>
+                <span class="match-card-status finished">Завершен</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Тоттенхэм</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-score-num">2</span>
+                    <span style="color: var(--ws-text-tertiary)">:</span>
+                    <span class="match-card-score-num">1</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 12px; border-top: 1px solid var(--ws-border); margin-top: 12px;">
+                <span style="background: var(--ws-accent-green); color: white; padding: 4px 10px; border-radius: var(--ws-radius-full); font-size: 11px; font-weight: 600;">⚽ Гол 34'</span>
+            </div>
+        </a>
+
+        <a href="match-post.html" class="match-card">
+            <div class="match-card-header">
+                <span class="match-card-league">АПЛ • 15 декабря</span>
+                <span class="match-card-status finished">Завершен</span>
+            </div>
+            <div class="match-card-teams">
+                <div class="match-card-team">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Ливерпуль</span>
+                </div>
+                <div class="match-card-score">
+                    <span class="match-card-score-num">6</span>
+                    <span style="color: var(--ws-text-tertiary)">:</span>
+                    <span class="match-card-score-num">3</span>
+                </div>
+                <div class="match-card-team away">
+                    <div class="match-card-team-logo">
+                        <img src="https://media.api-sports.io/football/teams/47.png" alt="">
+                    </div>
+                    <span class="match-card-team-name">Тоттенхэм</span>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 12px; border-top: 1px solid var(--ws-border); margin-top: 12px;">
+                <span style="background: var(--ws-accent-green); color: white; padding: 4px 10px; border-radius: var(--ws-radius-full); font-size: 11px; font-weight: 600; margin-right: 4px;">⚽ 2 гола</span>
+                <span style="background: var(--ws-accent-blue); color: white; padding: 4px 10px; border-radius: var(--ws-radius-full); font-size: 11px; font-weight: 600;">🅰️ 1 ассист</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Tab: Career -->
+    <div class="content tab-content" id="tab-career">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Клубная карьера</div>
+
+        <a href="team.html" class="team-card">
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/40.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Ливерпуль</div>
+                <div class="team-card-meta">2017 — настоящее время</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">226</div>
+                    <div class="team-card-stat-label">Игр</div>
+                </div>
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value" style="color: var(--ws-accent-orange);">157</div>
+                    <div class="team-card-stat-label">Голов</div>
+                </div>
+            </div>
+        </a>
+
+        <div class="team-card">
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/497.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Рома</div>
+                <div class="team-card-meta">2015 — 2017</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">83</div>
+                    <div class="team-card-stat-label">Игр</div>
+                </div>
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value" style="color: var(--ws-accent-orange);">34</div>
+                    <div class="team-card-stat-label">Голов</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/49.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Челси</div>
+                <div class="team-card-meta">2014 — 2015</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">19</div>
+                    <div class="team-card-stat-label">Игр</div>
+                </div>
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value" style="color: var(--ws-accent-orange);">2</div>
+                    <div class="team-card-stat-label">Голов</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-card-logo">
+                <img src="https://media.api-sports.io/football/teams/745.png" alt="">
+            </div>
+            <div class="team-card-info">
+                <div class="team-card-name">Базель</div>
+                <div class="team-card-meta">2012 — 2014</div>
+            </div>
+            <div class="team-card-stats">
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value">79</div>
+                    <div class="team-card-stat-label">Игр</div>
+                </div>
+                <div class="team-card-stat">
+                    <div class="team-card-stat-value" style="color: var(--ws-accent-orange);">20</div>
+                    <div class="team-card-stat-label">Голов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Фильтры</span>
+                <button class="modal-close" onclick="closeFilterModal()">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 style="margin-bottom:12px;font-size:14px;color:var(--ws-text-secondary)">Турнир</h4>
+                <div class="filter-option selected" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Все турниры</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Премьер-лига</span>
+                </div>
+                <div class="filter-option" onclick="toggleFilter(this)">
+                    <div class="filter-option-check">
+                        <span class="material-symbols-rounded">check</span>
+                    </div>
+                    <span class="filter-option-text">Лига чемпионов</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WIN Button -->
+    <a href="#" class="floating-win-btn" onclick="alert('WIN AI: Забьёт ли Салах в следующем матче?')">
         <span>WIN</span>
     </a>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="bottom-nav-inner">
             <a href="index.html" class="bottom-nav-item active">WS</a>
@@ -549,11 +578,48 @@
     </nav>
 
     <script>
+        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
                 this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabId).classList.add('active');
             });
+        });
+
+        // Favorite toggle
+        function toggleFavorite(btn) {
+            const icon = btn.querySelector('.material-symbols-rounded');
+            if (icon.textContent === 'favorite_border') {
+                icon.textContent = 'favorite';
+                icon.style.color = '#EF4444';
+            } else {
+                icon.textContent = 'favorite_border';
+                icon.style.color = 'white';
+            }
+        }
+
+        // Filter modal
+        function openFilterModal() {
+            document.getElementById('filterModal').classList.add('open');
+        }
+
+        function closeFilterModal() {
+            document.getElementById('filterModal').classList.remove('open');
+        }
+
+        function toggleFilter(el) {
+            el.parentElement.querySelectorAll('.filter-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            el.classList.add('selected');
+        }
+
+        document.getElementById('filterModal').addEventListener('click', function(e) {
+            if (e.target === this) closeFilterModal();
         });
     </script>
 </body>
